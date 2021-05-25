@@ -9,38 +9,18 @@ package compiler.scanner.pkg2;
  *
  * @author mode_
  */
-import java.util.HashMap;
-import java.util.Set;
+
 class Lexeme {
- HashMap<String, String> Lex = new HashMap<String, String>(); 
- HashMap<String, String> Tok = new HashMap<String, String>(); 
-    public Lexeme() {
-    Lex.put("Divisio", "Class");
-    Lex.put("InferedFrom", "Inheritance");
-    Lex.put("WhetherDo-Else", "Condition");
-    Lex.put("Ire", "Integer");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
-    Lex.put("Divisio", "Class");
+      public static final String[] Lex={"Divisio","InferedFrom",
+            "WhetherDo-Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","Check–CaseOf",
+            "TerminateThisNow","RingWhen","BackedValue","STT","else",
+            "Beginning","End","+","-","*",
+            "/","&&","||","~","==",
+            "<",">","!=","<=",">=",
+            "=",".","{}","[]",
+            "'","","Using","/#","#/",
+            "/-","@",";"};
+      
     
     }
 
@@ -48,4 +28,4 @@ class Lexeme {
 
     
     
-}
+
