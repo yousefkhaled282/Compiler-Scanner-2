@@ -9,10 +9,24 @@ package compiler.scanner.pkg2;
  *
  * @author mode_
  */
-
+import java.util.ArrayList;
 class Lexeme {
-
-   
+ArrayList<Integer> constant = new ArrayList<Integer>();
+    public Lexeme() {
+        for(int j = 0;j<=999999999;j++){
+            constant.add(j);
+        }  
+    }
+    public boolean isConstant(int num){
+        for(int k=0; k<constant.size();k++){
+            if(constant.get(k)==num){
+               return true; 
+            }
+                
+        }
+        return false;
+    }
+    
     
     public static final String[] Lex={"Divisio","InferedFrom",
             "WhetherDo-Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","NoneValue",
@@ -79,11 +93,13 @@ class Lexeme {
             default: return"Not Exist";  
         } 
     }
-     public static final String Constant=" 0 1 2 3 4 5 6 7 8 9";
-     public static boolean isConstant(String token){return Constant.contains(token);}
+    // public static final String Constant=" 0 1 2 3 4 5 6 7 8 9";
+     //public static boolean isConstant(String token){return Constant.contains(token);}  
      
-      
-    }
+}
+     
+     
+   
 
 
    

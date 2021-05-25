@@ -14,7 +14,12 @@ public class CompilerScanner2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-          Lexeme lex = new Lexeme();
+        int x = 5454 ;
+        Lexeme lex = new Lexeme();
+        System.out.println(lex.isConstant(x));
+        if(lex.isConstant(x)){
+            System.out.println("Constant");
+        }
           
           
         
