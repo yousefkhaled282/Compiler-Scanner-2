@@ -5,9 +5,7 @@
  */
 package compiler.scanner.pkg2;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
+
 
 
 public class CompilerScanner2 {
@@ -16,9 +14,10 @@ public class CompilerScanner2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
-        //System.out.println(x.keySet());
-        System.out.println("\"");
+          Lexeme lex = new Lexeme();
+          
+          
+        
          
         }
        
