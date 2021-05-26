@@ -9,24 +9,45 @@ package compiler.scanner.pkg2;
  *
  * @author mode_
  */
+import static java.lang.Character.compare;
 import java.util.ArrayList;
 class Lexeme {
-ArrayList<Integer> constant = new ArrayList<Integer>();
-    public Lexeme() {
-        for(int j = 0;j<=999999999;j++){
-            constant.add(j);
-        }  
-    }
-    public boolean isConstant(int num){
-        for(int k=0; k<constant.size();k++){
-            if(constant.get(k)==num){
-               return true; 
+
+    public static final char[] NUMBER={'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    
+    
+    public static boolean isNumber(char token)
+     {  
+         boolean result = false;
+         for(int i=0;i<10;i++)
+        {
+            if(compare(token,NUMBER[i])==1)
+            {
+                result = true;
             }
-                
         }
-        return false;
+        return result;
     }
     
+     public static boolean isConstant(String Token)
+    {
+        boolean result = false;
+        for(int i=0;i<Token.length();i++)
+        {
+            char c = Token.charAt(i);
+            
+                if(isNumber(c))
+                {
+                    result = true;
+                }
+                else
+            {
+                return false;
+            }
+            
+        }
+        return result;
+    }
     
     public static final String[] Lex={"Divisio","InferedFrom",
             "WhetherDo-Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","NoneValue",
