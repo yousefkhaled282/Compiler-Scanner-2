@@ -14,8 +14,11 @@ public class CompilerScanner2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String x = "99999999" ;
+        String x = "99999999" ; //checking lexemes
+        String z="compiler 2133"; // identifier checking
         Lexeme lex = new Lexeme();
+        RegularExpression reg= new RegularExpression();
+        System.out.println(reg.isIdentefier(z));
         if(lex.isConstant(x))
         {
                 System.out.println("Constant");
