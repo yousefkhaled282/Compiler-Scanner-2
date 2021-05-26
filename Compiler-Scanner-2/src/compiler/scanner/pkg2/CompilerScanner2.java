@@ -23,6 +23,12 @@ public class CompilerScanner2 {
         RegularExpression RE = new RegularExpression();
         String s= "ajd12";
         System.out.println(RE.isIdentefier(s));
+        
+        ScannerGUI sc=new ScannerGUI();
+        sc.setVisible(true);
+        System.out.println(sc.scan);
+        
+        
     }
     
     
