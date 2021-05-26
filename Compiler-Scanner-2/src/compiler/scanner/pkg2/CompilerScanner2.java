@@ -15,16 +15,22 @@ public class CompilerScanner2 {
      */
     public static void main(String[] args) {
         String x = "99999999" ; //checking lexemes
-        String z="compiler 2133"; // identifier checking
+        String z="compiler2133,88rrriri"; // identifier checking
+        String tok ="Divisio";// Check lexeme
         Lexeme lex = new Lexeme();
         RegularExpression reg= new RegularExpression();
         System.out.println(reg.isIdentefier(z));
+        
+        //Check number and return 
         if(lex.isConstant(x))
         {
                 System.out.println("Constant");
 
         }
-          
+        //Return Token and Check Lexeme Found or not
+        if(lex.isLex(tok)){
+            System.out.println(lex.getToken(tok));
+        }  
         
          
         }
