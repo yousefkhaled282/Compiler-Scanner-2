@@ -26,7 +26,7 @@ public class CompilerScanner2 {
         //file
       try {
       File myObj = new File("C:\\Users\\mustafa mahamoud\\Documents\\GitHub\\Compiler-Scanner-2\\Compiler-Scanner-2\\File.txt");
-      Scanner myReader = new Scanner(myObj);  
+      Scanner myReader = new Scanner(myObj); 
       while (myReader.hasNextLine()) {
         String data = myReader.nextLine();
         numLine++;
@@ -66,7 +66,7 @@ public class CompilerScanner2 {
         String[] currencies = lineOfCurrencies.split(" ");
         Lexeme lex = new Lexeme();
         RegularExpression reg= new RegularExpression();
-         if(lineOfCurrencies.startsWith("/")){
+         if(lineOfCurrencies.startsWith("/")||lineOfCurrencies.startsWith("/*")||lineOfCurrencies.endsWith("*/")){
              //do not read
             }else{
         for(int i=0;i<currencies.length;i++){
@@ -85,7 +85,7 @@ public class CompilerScanner2 {
         Lexeme lex = new Lexeme();
         RegularExpression reg= new RegularExpression();
         int errors=0,num=0;  
-         if(lineOfCurrencies.startsWith("/")){
+         if(lineOfCurrencies.startsWith("/")||lineOfCurrencies.startsWith("/*")||lineOfCurrencies.endsWith("*/")){
              //do not read
             }else{
         for(int i=0;i<currencies.length;i++){

@@ -1,3 +1,4 @@
-Ire @ decrease(){
-Ire @ 3num = 5 ;
-/ 6mm
+Ire @ 3num = 5 ; 
+/* Ire @ decrease(){
+Ire @ 3num = 5 ; */
+6mm
