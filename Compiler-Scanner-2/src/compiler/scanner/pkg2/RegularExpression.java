@@ -20,7 +20,7 @@ public class RegularExpression {
         boolean result = false;
          for(int i=0;i<53;i++)
         {
-            if(compare(token,ALPHABET[i])==1)
+            if(token == ALPHABET[i])
             {
                 result = true;
             }
@@ -32,7 +32,7 @@ public class RegularExpression {
          boolean result = false;
          for(int i=0;i<10;i++)
         {
-            if(compare(token,NUMBER[i])==1)
+            if(token == NUMBER[i])
             {
                 result = true;
             }
@@ -56,6 +56,10 @@ public class RegularExpression {
             else if(isNumber(c) || isAlaphabet(c))
             {
                 result = true;
+            }
+            else if(c == ' ')
+            {
+                return false;
             }
         }
         return result;        

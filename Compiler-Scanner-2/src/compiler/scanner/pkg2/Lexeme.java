@@ -21,7 +21,7 @@ class Lexeme {
          boolean result = false;
          for(int i=0;i<10;i++)
         {
-            if(compare(token,NUMBER[i])==1)
+            if(token == NUMBER[i])
             {
                 result = true;
             }
