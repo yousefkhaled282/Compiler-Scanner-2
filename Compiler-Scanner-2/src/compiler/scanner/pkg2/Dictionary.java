@@ -83,6 +83,10 @@ public class Dictionary<K, V> {
         }
     }
     
+    public LinkedList<K> getKeys(){
+        return keys;
+    }
+    
     private class Node<K, V>{
         private final K key;
         private V value;
