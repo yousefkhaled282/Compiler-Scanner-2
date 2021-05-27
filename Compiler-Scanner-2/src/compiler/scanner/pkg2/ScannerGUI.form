@@ -53,7 +53,7 @@
                   </Group>
               </Group>
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="0" pref="316" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="320" max="32767" attributes="0"/>
                   <Component id="ScanButton" min="-2" pref="149" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="BrowseButton" min="-2" pref="149" max="-2" attributes="0"/>

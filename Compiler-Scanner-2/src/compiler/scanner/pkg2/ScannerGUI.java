@@ -5,8 +5,12 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.Scanner.Result;
+import static compiler.scanner.pkg2.Scanner.error;
 import java.awt.TextArea;
-import java.io.File;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ScannerGUI extends javax.swing.JFrame {
     public String scan;
-    public String [] test={"yousef","Mustafa","Ramzy","semii","Kirollos"};
+    public String [] test={"k","n","N","X","X"};
     public String path;
 
    public ScannerGUI(){
@@ -138,6 +142,18 @@ public class ScannerGUI extends javax.swing.JFrame {
 			
 	    if(response == JFileChooser.APPROVE_OPTION){
                 path=fileChooser.getSelectedFile().getAbsolutePath();
+              String contents = null;
+                    try {
+                     contents = new String(Files.readAllBytes(Paths.get(path)));
+                    } catch (IOException e) {
+                     e.printStackTrace();
+                    }
+                    String[] lines = contents.split("\\r?\\n");
+                       int num=0;
+            for (String line : lines) {
+                num++;
+                Result(line,num);
+        }
 		System.out.println(path);
             }
         }
@@ -147,7 +163,17 @@ public class ScannerGUI extends javax.swing.JFrame {
         
          scan=TextArea.getText();
          System.out.println(scan);
-         
+                  int error=0;
+
+           if(scan != null){
+         String[] lines = scan.split("\n");
+         int num=0;
+            for (String line : lines) {
+                num++;
+                Result(line,num);
+                error+=error(line);
+        }}
+           System.out.print(error);
          DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
          Object[] row = new Object[5];
         

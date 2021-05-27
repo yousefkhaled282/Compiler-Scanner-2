@@ -5,6 +5,7 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.Scanner.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -26,9 +27,10 @@ public class CompilerScanner2 {
         
         ScannerGUI sc=new ScannerGUI();
         sc.setVisible(true);
-        System.out.println(sc.scan);
+        //Result(sc.scan);
+       // System.out.println(sc.scan);
         
-        
+       
     }
     
     
