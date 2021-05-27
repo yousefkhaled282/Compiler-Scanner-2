@@ -58,6 +58,15 @@ class Lexeme {
             "=",".","{","}","[","]",
             "'","\"","Using","/#","#/",
             "/-","@",";"};
+    
+    public static int Get(String Lexe){
+       for(int i=0;i<Lex.length;i++){
+         if(Lexe.equals(Lex[i])){
+             return i;
+         }
+       }
+       return -1;
+    }
      public static boolean isLex(String token){
        for(int i=0;i<Lex.length;i++){
            if (Lex[i].equals(token))

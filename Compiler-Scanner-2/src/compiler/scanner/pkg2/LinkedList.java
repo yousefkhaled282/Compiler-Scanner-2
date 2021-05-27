@@ -45,6 +45,23 @@ public class LinkedList<T> {
         }
         return null;
     }
+    public T get(int index){
+           if(index == 0)
+return head.value;
+Node<T> temp = head;
+for(int i = 0; i < index && i < size; i++){
+if(temp.nextNode != null){
+temp = temp.nextNode;
+}
+}
+return temp.value;
+    }
+    
+    
+    
+    
+    
+    
     
     public void remove(T value){
         Node<T> temp = head;
@@ -63,6 +80,8 @@ public class LinkedList<T> {
         }
     }
 
+
+
     private class Node<T>{
         private T value;
         private Node<T> nextNode;
@@ -70,6 +89,8 @@ public class LinkedList<T> {
             this.value = value;
         }
     }
-    
+    public int getSize(){
+        return size;
+    }
     
 }

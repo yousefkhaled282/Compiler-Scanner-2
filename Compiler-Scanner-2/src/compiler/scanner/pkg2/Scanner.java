@@ -11,22 +11,32 @@ import java.util.*;
  */
 public class Scanner {        
      public static void Result(String lineOfCurrencies,int x){
-                                ScannerGUI sc=new ScannerGUI();
-
+        ScannerGUI sc=new ScannerGUI();
         String[] currencies = lineOfCurrencies.split(" ");
+        int[] noLex=new int[Lexeme.Lex.length];
         Lexeme lex = new Lexeme();  
         RegularExpression reg= new RegularExpression();
          if(lineOfCurrencies.startsWith("/")||lineOfCurrencies.startsWith("/*")||lineOfCurrencies.endsWith("*/")){
              //do not read
             }else{
+                for(int i=0;i<currencies.length;i++){
+                if(lex.isLex(currencies[i])){
+                    int index=Lexeme.Get(currencies[i]);
+                    int count=noLex[index];
+                    noLex[index]=++count;        
+        }   
+                }
         for(int i=0;i<currencies.length;i++){
-           
-            
-         if(lex.isLex(currencies[i])){
-             String str1 = Integer.toString(x);
-             String out=str1+" "+currencies[i]+" "+lex.getToken(currencies[i])+" "+"Matched"+" "+"error";
-            System.out.println("Line No"+x+"Lexeme  "+currencies[i]+" Token"+lex.getToken(currencies[i])+"  Matched");
-
+           if(lex.isLex(currencies[i])){
+               int index=Lexeme.Get(currencies[i]);
+              String NoLine = Integer.toString(x);
+              String NoLex = Integer.toString(noLex[index]);
+               System.out.println("Line No"+x+"Lexeme  "+currencies[i]+" Token"+lex.getToken(currencies[i])+"  Matched"+noLex[index]);
+               String Result[]={NoLine,currencies[i],lex.getToken(currencies[i]),"Matched",NoLex};
+               for (int z= 0; z <Result.length; z++){
+                           sc.test[z] = Result[z];
+                }
+               //sc.test=Result;
         }  
         }
          }

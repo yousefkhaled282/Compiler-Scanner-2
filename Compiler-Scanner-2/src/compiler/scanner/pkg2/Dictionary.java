@@ -69,6 +69,7 @@ public class Dictionary<K, V> {
         if(node != null){
             table[key.hashCode() % table.length] = null;
             keys.remove(key);
+            size--;
         }
     }
     
@@ -96,5 +97,8 @@ public class Dictionary<K, V> {
             this.value = value;
             this.nextNode = nextNode;
         }
+    }
+    public int getSize(){
+    return size;
     }
 }

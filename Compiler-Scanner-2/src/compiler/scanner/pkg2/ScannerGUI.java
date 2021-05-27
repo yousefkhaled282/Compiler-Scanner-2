@@ -20,9 +20,9 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ScannerGUI extends javax.swing.JFrame {
     public String scan;
-    public String [] test={"k","n","N","X","X"};
+    public String [] test=new String[5];
     public String path;
-
+  
    public ScannerGUI(){
        initComponents();
    }
@@ -133,13 +133,11 @@ public class ScannerGUI extends javax.swing.JFrame {
 
     private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
         if(evt.getSource()==BrowseButton){
-            JFileChooser fileChooser = new JFileChooser();
-			
-	    fileChooser.setCurrentDirectory(new File(".")); //sets current directory
-			
-	    int response = fileChooser.showOpenDialog(null); //select file to open
+            JFileChooser fileChooser = new JFileChooser();			
+	    fileChooser.setCurrentDirectory(new File(".")); //sets current director
+            int response = fileChooser.showOpenDialog(null); //select file to open
 	    //int response = fileChooser.showSaveDialog(null); //select file to save
-			
+           Dictionary map=new Dictionary<Integer,String>();
 	    if(response == JFileChooser.APPROVE_OPTION){
                 path=fileChooser.getSelectedFile().getAbsolutePath();
               String contents = null;
@@ -148,32 +146,45 @@ public class ScannerGUI extends javax.swing.JFrame {
                     } catch (IOException e) {
                      e.printStackTrace();
                     }
-                    String[] lines = contents.split("\\r?\\n");
+                    String[] lines = contents.split("\n");
                        int num=0;
             for (String line : lines) {
-                num++;
-                Result(line,num);
-        }
+                     map.add(num++, line);
+            }
+            int error=0;
+             LinkedList <Integer> MapKeys=map.getKeys();
+            for(int i=0;i<MapKeys.getSize();i++){
+                Result((String) map.get(i),i);
+                error+=error((String) map.get(i));
+           }
 		System.out.println(path);
             }
         }
     }//GEN-LAST:event_BrowseButtonActionPerformed
 
     private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
-        
+        //Input Scanner
+        Dictionary map=new Dictionary<Integer,String>();
          scan=TextArea.getText();
-         System.out.println(scan);
-                  int error=0;
+                int error=0;
 
-           if(scan != null){
+        if(scan != null){
          String[] lines = scan.split("\n");
          int num=0;
             for (String line : lines) {
-                num++;
-                Result(line,num);
-                error+=error(line);
+                if(line!=null){
+                     map.add(num++, line);
+                     
+                }
+                
         }}
-           System.out.print(error);
+           LinkedList <Integer> MapKeys=map.getKeys();
+           for(int i=0;i<MapKeys.getSize();i++){
+             Result((String) map.get(i),i);
+            error+=error((String) map.get(i));
+           }
+         // System.out.print(error);
+           
          DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
          Object[] row = new Object[5];
         
