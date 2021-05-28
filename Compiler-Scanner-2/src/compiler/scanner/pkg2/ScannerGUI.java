@@ -7,12 +7,20 @@ package compiler.scanner.pkg2;
 
 import static compiler.scanner.pkg2.Scanner.Result;
 import static compiler.scanner.pkg2.Scanner.error;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.TextArea;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Document;
+import javax.swing.text.Element;
+import javax.swing.text.Utilities;
 
 /**
  *
@@ -43,6 +51,7 @@ public class ScannerGUI extends javax.swing.JFrame {
         ScanButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         OutputTable = new javax.swing.JTable();
+        CommentButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -82,6 +91,13 @@ public class ScannerGUI extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(OutputTable);
 
+        CommentButton.setText("Comment");
+        CommentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CommentButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -92,23 +108,26 @@ public class ScannerGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane2)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 900, Short.MAX_VALUE)))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 316, Short.MAX_VALUE)
+                .addGap(0, 175, Short.MAX_VALUE)
+                .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(274, 274, 274))
+                .addGap(286, 286, 286))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(184, 184, 184))
         );
 
@@ -197,6 +216,50 @@ public class ScannerGUI extends javax.swing.JFrame {
             model.addRow(row);
     }//GEN-LAST:event_ScanButtonActionPerformed
 
+    private void CommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentButtonActionPerformed
+                                            
+        // TODO add your handling code here:
+        int line = 0;
+        try {
+        int offset = TextArea.getCaretPosition();
+        line = TextArea.getLineOfOffset(offset);
+        System.out.println(line + 1);
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Document doc = TextArea.getDocument();
+        Element root = doc.getDefaultRootElement();
+        Element contentEl = root.getElement(line);
+
+        int start = contentEl.getStartOffset();
+        int end = contentEl.getEndOffset();
+        
+        // remove words in the line (-1 to prevent removing newline character)
+        String txt;
+        try {
+            txt = doc.getText(start, end - start - 1);
+        
+        if(txt == null){
+            doc.remove(start, end - start - 1);
+            doc.insertString(start,"/-"+txt, null);
+        }
+        else if(txt != null && txt.indexOf("/-") == 0)
+        {
+            doc.remove(start, end - start - 1);
+            txt = "" + txt.substring(1, txt.length());
+            txt = "" + txt.substring(1, txt.length());
+            doc.insertString(start,""+txt, null);
+        }
+        else
+        {
+            doc.remove(start, end - start - 1);
+            doc.insertString(start,"/-" + (txt != null ? txt : ""), null);
+        }
+        } catch (BadLocationException ex) {
+            Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_CommentButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -234,6 +297,7 @@ public class ScannerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseButton;
+    private javax.swing.JButton CommentButton;
     private javax.swing.JTable OutputTable;
     private javax.swing.JButton ScanButton;
     private javax.swing.JTextArea TextArea;
