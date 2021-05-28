@@ -10,17 +10,29 @@ import static compiler.scanner.pkg2.Scanner.error;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.TextArea;
+<<<<<<< Updated upstream
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+=======
+import java.awt.event.KeyEvent;
+import java.io.File;
+import java.util.*;
+>>>>>>> Stashed changes
 import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
+<<<<<<< Updated upstream
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.Utilities;
+=======
+import javax.swing.text.Highlighter;
+>>>>>>> Stashed changes
 
 /**
  *
@@ -30,9 +42,41 @@ public class ScannerGUI extends javax.swing.JFrame {
     public String scan;
     public String [] test=new String[5];
     public String path;
+<<<<<<< Updated upstream
   
    public ScannerGUI(){
+=======
+    Set<String> s;
+    public String dataGen;
+    public String TextString;
+    public int start;
+    public int end;
+    
+    public ScannerGUI(){
+>>>>>>> Stashed changes
        initComponents();
+       Error();
+       s= new TreeSet<String>(); 
+       s.add("Divisio");
+       s.add("DnferedFrom");
+       s.add("WhetherDo-Else");
+       s.add("Ire");
+       s.add("Sire");
+       s.add("Clo");
+       s.add("SetOfClo");
+       s.add("FBU");
+       s.add("SFBU");
+       s.add("NoneValue");
+       s.add("TerminateThisNow");
+       s.add("RingWhen( ){\n\n\n\n\t}");
+       s.add("BackedValue");
+       s.add("STT");
+       s.add("Check–CaseOf");
+       s.add("End");
+       s.add("Beginning");
+       s.add("Using");
+       //////////////////////////////
+        
    }
 
     /**
@@ -51,12 +95,27 @@ public class ScannerGUI extends javax.swing.JFrame {
         ScanButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         OutputTable = new javax.swing.JTable();
+<<<<<<< Updated upstream
         CommentButton = new javax.swing.JButton();
+=======
+        jTextField1 = new javax.swing.JTextField();
+        Genrate = new javax.swing.JButton();
+>>>>>>> Stashed changes
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         TextArea.setColumns(20);
         TextArea.setRows(5);
+        TextArea.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                TextAreaMouseReleased(evt);
+            }
+        });
+        TextArea.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                TextAreaKeyReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(TextArea);
 
         BrowseButton.setText("Browse");
@@ -91,10 +150,29 @@ public class ScannerGUI extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(OutputTable);
 
+<<<<<<< Updated upstream
         CommentButton.setText("Comment");
         CommentButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CommentButtonActionPerformed(evt);
+=======
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField1KeyReleased(evt);
+            }
+        });
+
+        Genrate.setText("Generate");
+        Genrate.setToolTipText("");
+        Genrate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                GenrateActionPerformed(evt);
+>>>>>>> Stashed changes
             }
         });
 
@@ -103,6 +181,7 @@ public class ScannerGUI extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< Updated upstream
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2)
@@ -115,13 +194,46 @@ public class ScannerGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(286, 286, 286))
+=======
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 6, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(274, 274, 274))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 815, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(Genrate, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())))))
+>>>>>>> Stashed changes
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
+<<<<<<< Updated upstream
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+=======
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(Genrate)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> Stashed changes
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -137,21 +249,72 @@ public class ScannerGUI extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 13, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 584, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
+
+        scan=TextArea.getText();
+        System.out.println(scan);
+
+        DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
+        Object[] row = new Object[5];
+
+        row[0] =test[0];
+        row[1] =test[1];
+        row[2] =test[2];
+        row[3] =test[3];
+        row[4] =test[4];
+
+        model.addRow(row);
+    }//GEN-LAST:event_ScanButtonActionPerformed
+
+    public void Error(){
+        TextArea.getDocument().addDocumentListener(new DocumentListener() {
+
+        @Override
+        public void removeUpdate(DocumentEvent e) {
+
+        }
+
+        @Override
+        public void insertUpdate(DocumentEvent e) {
+           
+            start = e.getLength();
+            end =e.getOffset();
+            
+            System.out.println("Start  "+ start);
+            System.out.println("end  " +end);
+            if(TextArea.getText().substring(end).equals("@")){
+                do{
+                    start = end + e.getLength();
+                    end = e.getOffset();
+                    System.out.println("Start  "+ start);
+                    System.out.println("end  " +end);
+                }while(!(TextArea.getText().substring(end).equals(";")));
+                 
+            }
+            
+        }
+
+        @Override
+        public void changedUpdate(DocumentEvent arg0) {
+            
+        }
+    }); 
+    }
     private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
         if(evt.getSource()==BrowseButton){
+<<<<<<< Updated upstream
             JFileChooser fileChooser = new JFileChooser();			
 	    fileChooser.setCurrentDirectory(new File(".")); //sets current director
             int response = fileChooser.showOpenDialog(null); //select file to open
@@ -177,10 +340,23 @@ public class ScannerGUI extends javax.swing.JFrame {
                 error+=error((String) map.get(i));
            }
 		System.out.println(path);
+=======
+            JFileChooser fileChooser = new JFileChooser();
+
+            fileChooser.setCurrentDirectory(new File(".")); //sets current directory
+
+            int response = fileChooser.showOpenDialog(null); //select file to open
+            //int response = fileChooser.showSaveDialog(null); //select file to save
+
+            if(response == JFileChooser.APPROVE_OPTION){
+                path=fileChooser.getSelectedFile().getAbsolutePath();
+                System.out.println(path);
+>>>>>>> Stashed changes
             }
         }
     }//GEN-LAST:event_BrowseButtonActionPerformed
 
+<<<<<<< Updated upstream
     private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
         //Input Scanner
         Dictionary map=new Dictionary<Integer,String>();
@@ -206,16 +382,25 @@ public class ScannerGUI extends javax.swing.JFrame {
            
          DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
          Object[] row = new Object[5];
-        
-            row[0] =test[0];
-            row[1] =test[1];
-            row[2] =test[2];
-            row[3] =test[3];
-            row[4] =test[4];
-            
-            model.addRow(row);
-    }//GEN-LAST:event_ScanButtonActionPerformed
+=======
+    private void TextAreaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TextAreaKeyReleased
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_TextAreaKeyReleased
 
+    private void TextAreaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextAreaMouseReleased
+        // TODO add your handling code here:
+   
+>>>>>>> Stashed changes
+        
+    }//GEN-LAST:event_TextAreaMouseReleased
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+       
+      
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+<<<<<<< Updated upstream
     private void CommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentButtonActionPerformed
                                             
         // TODO add your handling code here:
@@ -260,6 +445,52 @@ public class ScannerGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CommentButtonActionPerformed
 
+=======
+    private void GenrateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GenrateActionPerformed
+        // TODO add your handling code here:
+        TextArea.append(dataGen + '@');
+        
+    }//GEN-LAST:event_GenrateActionPerformed
+    
+   
+        
+    
+    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+    if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE||evt.getKeyCode()==KeyEvent.VK_DELETE)
+        {
+           
+        }
+        else
+        {   
+            String to_check=jTextField1.getText();
+            int to_check_len=to_check.length();
+            for(String data:s)
+            {
+                String check_from_data="";
+                for(int i=0;i<to_check_len;i++)
+                {
+                    if(to_check_len<=data.length())
+                    {
+                        check_from_data = check_from_data+data.charAt(i);
+                    }
+                }
+                //System.out.print(check_from_data);
+                if(check_from_data.equals(to_check))
+                {
+                    System.out.print("Found");
+                    
+                    jTextField1.setText(data);
+                    dataGen=data;
+                    jTextField1.setSelectionStart(to_check_len);
+                    jTextField1.setSelectionEnd(data.length());
+                    break;
+                    
+                }
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1KeyReleased
+   
+>>>>>>> Stashed changes
     /**
      * @param args the command line arguments
      */
@@ -297,12 +528,17 @@ public class ScannerGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseButton;
+<<<<<<< Updated upstream
     private javax.swing.JButton CommentButton;
+=======
+    private javax.swing.JButton Genrate;
+>>>>>>> Stashed changes
     private javax.swing.JTable OutputTable;
     private javax.swing.JButton ScanButton;
     private javax.swing.JTextArea TextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

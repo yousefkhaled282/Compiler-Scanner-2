@@ -13,12 +13,13 @@ import static java.lang.Character.*;
  * @author Mustafa Mahmoud
  */
 public class RegularExpression {
-    public static final char[] ALPHABET={'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n' ,'o' ,'p' ,'q' ,'r' ,'s' ,'t', 'u','v', 'w', 'x', 'y', 'z', '_' ,'Q', 'W','E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P', 'A', 'S', 'D', 'F', 'G', 'H', 'J' ,'K' ,'L', 'Z', 'X', 'C', 'V' ,'B' ,'N','M'};
+    public static final char[] ALPHABET={'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n' ,'o' ,'p' ,'q' ,'r' ,'s' ,'t', 'u','v', 'w', 'x', 'y', 'z', '_' ,'A', 'B','C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'Q', 'P' ,'S' ,'T', 'U', 'V', 'W', 'X' ,'Y' ,'Z'};
     public static final char[] NUMBER={'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
+    
     public static boolean isAlaphabet(char token)
     {
         boolean result = false;
-         for(int i=0;i<53;i++)
+         for(int i=0;i<52;i++)
         {
             if(token == ALPHABET[i])
             {
