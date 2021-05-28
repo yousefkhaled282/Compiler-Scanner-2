@@ -5,15 +5,15 @@
  */
 package compiler.scanner.pkg2;
 
-<<<<<<< Updated upstream
+
 import static compiler.scanner.pkg2.Scanner.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
-=======
->>>>>>> Stashed changes
+
+
 
 
 
@@ -25,7 +25,7 @@ public class CompilerScanner2 {
      */
     public static void main(String[] args) {
         RegularExpression RE = new RegularExpression();
-<<<<<<< Updated upstream
+
 //        String s= "ajd12";
 //        System.out.println(RE.isIdentefier(s));
         
@@ -33,7 +33,7 @@ public class CompilerScanner2 {
         sc.setVisible(true);
         //Result(sc.scan);
        // System.out.println(sc.scan);
-=======
+
         String s= " aj d12";
         System.out.println(RE.isIdentefier(s));
         
@@ -41,7 +41,7 @@ public class CompilerScanner2 {
         sc.setVisible(true);
         
         
->>>>>>> Stashed changes
+
         
        
     }
