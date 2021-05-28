@@ -14,8 +14,27 @@ import java.util.ArrayList;
 class Lexeme {
 
     public static final char[] NUMBER={'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
+     public static final char[] Symbols={'+','-', '*', '/', '=', '&', ';', '>', '<', '{','}','[',']','|','@','!','~','\'','\"','.'};
+     /*"+","-","*",
+            "/","&&","||","~","==",
+            "<",">","!=","<=",">=",
+            "=",".","{","}","[","]",
+            "'","\"","Using","/#","#/",
+            "/-","@",";"};   
+    */
     
-    
+    public static boolean isSymbol(char token)
+    {
+        boolean result = false;
+         for(int i=0;i<Symbols.length;i++)
+        {
+            if(token == Symbols[i])
+            {
+                result = true;
+            }
+        }
+        return result;
+    }
     public static boolean isNumber(char token)
      {  
          boolean result = false;
@@ -56,7 +75,7 @@ class Lexeme {
             "/","&&","||","~","==",
             "<",">","!=","<=",">=",
             "=",".","{","}","[","]",
-            "'","\"","Using","/#","#/",
+            "'","","Using","/#","#/",
             "/-","@",";"};
     
     public static int Get(String Lexe){
