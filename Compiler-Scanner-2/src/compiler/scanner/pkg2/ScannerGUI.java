@@ -5,6 +5,8 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.Compilation.compile_output;
+import static compiler.scanner.pkg2.Compilation.compile_error;
 import static compiler.scanner.pkg2.Scanner.Result;
 import static compiler.scanner.pkg2.Scanner.error;
 import java.awt.Font;
@@ -18,6 +20,7 @@ import java.util.*;
 import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static java.util.regex.Pattern.compile;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.BadLocationException;
@@ -244,11 +247,12 @@ public class ScannerGUI extends javax.swing.JFrame {
             for (String line : lines) {
                      map.add(num++, line);
             }
-            int error=0;
+            int error=0;       String out="";
              LinkedList <Integer> MapKeys=map.getKeys();
             for(int i=0;i<MapKeys.getSize();i++){
-                Result((String) map.get(i),i);
-                error+=error((String) map.get(i));
+                 out+=compile_output((String) map.get(i),i+1);
+                         
+           error+=compile_error((String) map.get(i));
            }
 		System.out.println(path);
             }
@@ -271,23 +275,29 @@ public class ScannerGUI extends javax.swing.JFrame {
                 }
                 
         }}
+       String out="";
            LinkedList <Integer> MapKeys=map.getKeys();
            for(int i=0;i<MapKeys.getSize();i++){
-             Result((String) map.get(i),i);
-            error+=error((String) map.get(i));
+             out+=compile_output((String) map.get(i),i+1);
+                         
+           error+=compile_error((String) map.get(i));
            }
-         // System.out.print(error);
-           
-         DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
-         Object[] row = new Object[5];
-        
-            row[0] =test[0];
-            row[1] =test[1];
-            row[2] =test[2];
-            row[3] =test[3];
-            row[4] =test[4];
+          System.out.print(error);
+         System.out.print(out);
+       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
+         String[] lines = out.split("\n");
+            for (String line : lines) {
+                String[] currencies = line.split("\t");
+                System.out.println(currencies.length);
+                Object[] row = new Object[5];
+                for(int i=0;i<currencies.length;i++){
+                             
+                       row[i]=currencies[i];
+                      
+                }
+         model.addRow(row);
+        }   
             
-            model.addRow(row);
     }//GEN-LAST:event_ScanButtonActionPerformed
 
     private void CommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentButtonActionPerformed

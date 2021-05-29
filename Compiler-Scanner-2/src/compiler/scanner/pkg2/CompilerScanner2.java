@@ -26,24 +26,24 @@ public class CompilerScanner2 {
      */
     public static void main(String[] args) {
        
-        RegularExpression RE = new RegularExpression();
+        //RegularExpression RE = new RegularExpression();
 
 //        String s= "ajd12";
 //        System.out.println(RE.isIdentefier(s));
         
-       // ScannerGUI sc=new ScannerGUI();
-        //sc.setVisible(true);
+        ScannerGUI sc=new ScannerGUI();
+        sc.setVisible(true);
         //Result(sc.scan);
-       // System.out.println(sc.scan);
+        //System.out.println(sc.scan);
 
         //String s= " aj d12";
         //System.out.println(RE.isIdentefier(s));
         ////////////////////////////////////////////
        
-       Compilation c = new Compilation();
-       
-       String i="Ire@3num=5;";
-        c.compile(i);    
+//       Compilation c = new Compilation();
+//       
+//       String i="Ire@3num=5;";
+//        c.compile(i);    
                 
              
       
