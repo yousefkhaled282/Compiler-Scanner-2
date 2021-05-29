@@ -14,7 +14,8 @@ import java.util.ArrayList;
 class Lexeme {
 
     public static final char[] NUMBER={'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
-     public static final char[] Symbols={'+','-', '*', '/', '=', '&', ';', '>', '<', '{','}','[',']','|','@','!','~','\'','\"','.'};
+     public static final char[] Symbols={'+','-', '*', '/', '=', '&', ';', '>', '<', '{','}','[',']','|','@','!','~','\'','\"','.','(',')'};
+     public static final String[] Symbolsrep={"==","||","&&","!=", "<=",">=","/#","#/","/-" };
      /*"+","-","*",
             "/","&&","||","~","==",
             "<",">","!=","<=",">=",
@@ -29,6 +30,18 @@ class Lexeme {
          for(int i=0;i<Symbols.length;i++)
         {
             if(token == Symbols[i])
+            {
+                result = true;
+            }
+        }
+        return result;
+    }
+    public static boolean isSymbolrep(String token)
+    {
+        boolean result = false;
+         for(int i=0;i<Symbolsrep.length;i++)
+        {
+            if(token.equals(Symbolsrep[i]))
             {
                 result = true;
             }
