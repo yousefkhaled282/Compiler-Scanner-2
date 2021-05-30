@@ -170,7 +170,7 @@ public class Compilation {
         } } 
    
     public static int  compile_error (String s1){
-        
+        int error=0;
          if(s1.startsWith("/-")){
               return 0;}else{
            ArrayList<Character> lexeme = new ArrayList<>();//Arraylist for add found Lexemes
@@ -207,8 +207,12 @@ public class Compilation {
         
         String lex = sb.toString();
         System.out.println(lex);
-        L.isLex(lex);
-        
+        if( L.isLex(lex)==true){
+            error--;
+        }else{
+            error++;
+       
+        }        
        
         
          //For loop for relational sumbol and logic symbol
@@ -294,9 +298,7 @@ public class Compilation {
          String iden = S_indentifier.toString();
          String [] arr= iden.split("/");//array string that we solit each identifier
          //For loop to split each identifer
-         int error=0;
-         for (int i =0;i<arr.length;i++){
-             
+         for (int i =0;i<arr.length;i++){            
              if(RE.isIdentefier(arr[i])){
              } else if (L.isConstant(arr[i])){
             }else{
