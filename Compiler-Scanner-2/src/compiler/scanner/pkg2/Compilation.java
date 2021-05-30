@@ -14,9 +14,7 @@ import java.util.ArrayList;
 public class Compilation {
 
    public static String compile_output (String s1,int x){
-        
-        if(s1.startsWith("/-")){return "";}else{
-           ArrayList<Character> lexeme = new ArrayList<>();//Arraylist for add found Lexemes
+         ArrayList<Character> lexeme = new ArrayList<>();//Arraylist for add found Lexemes
         ArrayList<Character> Identifier = new ArrayList<>();//Arraylist for add found Identifier
         ArrayList<Character> symbol = new ArrayList<>(); //Arraylist for add found Symbols
         ArrayList<Character> c = new ArrayList<>();//First Char list take the string input from String s1
@@ -25,7 +23,12 @@ public class Compilation {
         Lexeme L=new Lexeme();//Class Lexeme
          RegularExpression RE = new RegularExpression();
                 String symbols="";
-     
+        if(s1.startsWith("/-")){
+            symbols+=x+"\t"+"/-"+"\t"+L.getToken("/-")+"\t"+1+"\t"+"Matched"+"\n";
+            return symbols;
+        }else{
+          
+     int noLex=1;
         for (char ch : s1.toCharArray()) {
             c.add(ch);
         }
@@ -52,7 +55,7 @@ public class Compilation {
         String lex = sb.toString();
         //System.out.println(lex);
         L.isLex(lex);
-        symbols+=x+"\t"+"Token"+"\t"+L.getToken(lex)+"\t"+2+"\t"+"Matched"+"\n";
+        symbols+=x+"\t"+"Token"+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";
         //System.out.println("Token is\t"+L.getToken(lex)); 
         
        
@@ -87,8 +90,8 @@ public class Compilation {
             String varStr = Character.toString(varchar);
             if(L.isLex(varStr)){
                 //System.out.println("Symbol "+varStr+ " is "+L.getToken(varStr));
-                
-                symbols+=x+"\t"+varchar+"\t"+L.getToken(varStr)+"\t"+2+"\t"+"Matched"+"\n";
+                noLex++;
+                symbols+=x+"\t"+varchar+"\t"+L.getToken(varStr)+"\t"+noLex+"\t"+"Matched"+"\n";
 
             }
             
@@ -147,10 +150,12 @@ public class Compilation {
          for (int i =0;i<arr.length;i++){
              
              if(RE.isIdentefier(arr[i])){
-                  symbols+=x+"\t"+arr[i]+ "\t"+"Indentifier"+"\t"+2+"\t"+"Matched"+"\n";
+                 noLex++;
+                  symbols+=x+"\t"+arr[i]+ "\t"+"Indentifier"+"\t"+noLex+"\t"+"Matched"+"\n";
                  //System.out.println(arr[i]+" is Indentifier");
              } else if (L.isConstant(arr[i])){
-                symbols+=x+"\t"+arr[i]+"\t"+"Constant"+"\t"+2+"\t"+"Matched"+"\n";
+                 noLex++;
+                symbols+=x+"\t"+arr[i]+"\t"+"Constant"+"\t"+noLex+"\t"+"Matched"+"\n";
 
                  //System.out.println(arr[i]+" is Constant");
             }else{
@@ -163,7 +168,8 @@ public class Compilation {
    
     public static int  compile_error (String s1){
         
-         if(s1.startsWith("/-")){return -1;}else{
+         if(s1.startsWith("/-")){
+              return 0;}else{
            ArrayList<Character> lexeme = new ArrayList<>();//Arraylist for add found Lexemes
         ArrayList<Character> Identifier = new ArrayList<>();//Arraylist for add found Identifier
         ArrayList<Character> symbol = new ArrayList<>(); //Arraylist for add found Symbols

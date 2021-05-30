@@ -252,8 +252,18 @@ public class ScannerGUI extends javax.swing.JFrame {
             for(int i=0;i<MapKeys.getSize();i++){
                  out+=compile_output((String) map.get(i),i+1);
                          
-           error+=compile_error((String) map.get(i));
-           }
+                   error+=compile_error((String) map.get(i));
+           }       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
+                 String[] Result = out.split("\n");
+            for (String line : Result) {
+                String[] currencies = line.split("\t");
+               // System.out.println(currencies.length);
+                Object[] row = new Object[5];
+                for(int i=0;i<currencies.length;i++){        
+                       row[i]=currencies[i];    
+                }
+         model.addRow(row);
+        }
 		System.out.println(path);
             }
         }
@@ -283,17 +293,15 @@ public class ScannerGUI extends javax.swing.JFrame {
            error+=compile_error((String) map.get(i));
            }
           System.out.print(error);
-         System.out.print(out);
+         //System.out.print(out);
        DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
          String[] lines = out.split("\n");
             for (String line : lines) {
                 String[] currencies = line.split("\t");
-                System.out.println(currencies.length);
+               // System.out.println(currencies.length);
                 Object[] row = new Object[5];
-                for(int i=0;i<currencies.length;i++){
-                             
-                       row[i]=currencies[i];
-                      
+                for(int i=0;i<currencies.length;i++){        
+                       row[i]=currencies[i];    
                 }
          model.addRow(row);
         }   
