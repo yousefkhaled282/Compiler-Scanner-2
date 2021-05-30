@@ -55,7 +55,10 @@ public class Compilation {
         String lex = sb.toString();
         //System.out.println(lex);
         L.isLex(lex);
-        symbols+=x+"\t"+"Token"+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";
+        if( L.isLex(lex)==true){
+        symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";}else{
+        symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Not Matched"+"\n";
+        }
         //System.out.println("Token is\t"+L.getToken(lex)); 
         
        

@@ -271,6 +271,8 @@ public class ScannerGUI extends javax.swing.JFrame {
 
     private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
         //Input Scanner
+      DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
+model.setRowCount(0);
         Dictionary map=new Dictionary<Integer,String>();
          scan=TextArea.getText();
                 int error=0;
@@ -294,7 +296,6 @@ public class ScannerGUI extends javax.swing.JFrame {
            }
           System.out.print(error);
          //System.out.print(out);
-       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
          String[] lines = out.split("\n");
             for (String line : lines) {
                 String[] currencies = line.split("\t");
