@@ -51,55 +51,56 @@ public class CompilerScanner2 {
         //char s ='||'  ;
         String s="||/";
         char State ='A';
+        char [] c=s.toCharArray();
 
-     for (char c:s.toCharArray()){
+     for (int i=0;i<c.length;i++){
         // System.out.println("char "+c);
          
          switch(State){
              case('A'):{
                  {
-                 if(c=='!'){
+                 if(c[i]=='!'){
                      State='B';
                     
-                 }else if(c=='&'){
+                 }else if(c[i]=='&'){
                      State='C';
                      
-                 }else if(c=='-'){
+                 }else if(c[i]=='-'){
                      State='D';
                    
-                 }else if(c=='.'){
+                 }else if(c[i]=='.'){
                      State='E';  //FINAL
                      
-                 }else if(c=='/'){
+                 }else if(c[i]=='/'){
                      State='F'; //FINAL
-                 }else if(c=='<'){
+                 }else if(c[i]=='<'){
                      State='G';//FINAL
-                 }else if(c=='='){
+                 }else if(c[i]=='='){
                      State='H'; //FINAL WITH FINAL
-                 }else if(c=='>'){
+                 }else if(c[i]=='>'){
                      State='I';//FINAL WITH FINAL
-                 }else if(c=='*'){
+                 }else if(c[i]=='*'){
                      State='J';//FINAL WITH FINAL
-                 }else if(c=='+'){
+                 }else if(c[i]=='+'){
                      State='K';//FINAL
-                 }else if(c=='|'){
+                 }else if(c[i]=='|'){
                      State='L';
                      
-                 }else if(c=='~'){
+                 }else if(c[i]=='~'){
                      State='M';//FINAL
                  }
                 }
                  }break;
              case('B'):
                  {
-                     if(c=='='){
+                     if(c[i]=='='){
                          State='N';
                      }
                  
                  }break;
              case('C'):
                  {
-                 if(c=='&'){
+                 if(c[i]=='&'){
                          State='O';
                      }
                  }break;
@@ -113,7 +114,7 @@ public class CompilerScanner2 {
                 System.out.println("/");;
              }break;
              case('G'):{
-               if(c=='='){
+               if(c[i]=='='){
                          State='P';
                      }else{
                    State='G';
@@ -121,7 +122,7 @@ public class CompilerScanner2 {
              }break;
              case('H'):
                  {
-                if(c=='='){
+                if(c[i]=='='){
                     State='Q';
                      }else{
                    State='H';
@@ -129,7 +130,7 @@ public class CompilerScanner2 {
              }break;
              case('I'):  
                  {
-                     if(c=='='){
+                     if(c[i]=='='){
                          State='R';
                      }else{
                    State='I';
@@ -146,7 +147,7 @@ public class CompilerScanner2 {
              }break;
              case('L'):  
                  {
-                     if(c=='|'){
+                     if(c[i]=='|'){
                          State='S';
                  }
                  
@@ -189,7 +190,8 @@ public class CompilerScanner2 {
              
                 
          }
-         System.out.println("Char  "+c);
+         System.out.println("inter  "+i);
+         System.out.println("Char  "+c[i]);
          System.out.println("State  "+State);
         /*   if (State=='E'){
          System.out.println(".");         
