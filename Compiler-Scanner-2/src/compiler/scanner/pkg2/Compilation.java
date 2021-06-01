@@ -23,7 +23,7 @@ public class Compilation {
         Lexeme L=new Lexeme();//Class Lexeme
          RegularExpression RE = new RegularExpression();
                 String symbols="";
-                String ss="";
+                
         if(s1.startsWith("/-")){
             symbols+=x+"\t"+"/-"+"\t"+L.getToken("/-")+"\t"+1+"\t"+"Matched"+"\n";
             return symbols;
@@ -63,19 +63,19 @@ public class Compilation {
         //System.out.println("Token is\t"+L.getToken(lex)); 
         //For loop for relational sumbol and logic symbol
          
-      for (int i=0;i<index.size();i++){
-           
-            if(index.get(i)+1==index.get(i+1)){
-                 char vars=symbol.get(i);
-                char var1=symbol.get(i+1); 
-                 
-                ss=new StringBuilder().append(vars).append(var1).toString();
-               
-                } }
-       DFAtoCode df=new DFAtoCode();
-        
-        System.out.println(df.SymbolDFA(ss));
-        
+//      for (int i=0;i<index.size();i++){
+//           
+//            if(index.get(i)+1==index.get(i+1)){
+//                 char vars=symbol.get(i);
+//                char var1=symbol.get(i+1); 
+//                 
+//                ss=new StringBuilder().append(vars).append(var1).toString();
+//               
+//                } }
+//       DFAtoCode df=new DFAtoCode();
+//        
+//        System.out.println(df.SymbolDFA(ss));
+//        
         
         ///For Loop For detect symbol and its index 
         for(int i=0;i<c.size();i++){

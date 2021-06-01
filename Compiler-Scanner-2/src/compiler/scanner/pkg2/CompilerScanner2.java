@@ -27,22 +27,9 @@ public class CompilerScanner2 {
     public static void main(String[] args) {
        
         //RegularExpression RE = new RegularExpression();
-  ArrayList<Character> symbol= new ArrayList<>();//Arraylist for add found Lexemes
-    
-  ArrayList<Integer> index = new ArrayList<>();//Arraylist for add found Lexemes
-  symbol.add('=');
-  symbol.add('@');
-  symbol.add('=');
-  symbol.add('/');
-  symbol.add('!');
-  symbol.add('=');
-  index.add(0);
-  index.add(5);
-  index.add(7);
-  index.add(9);
-  index.add(11);
-  index.add(12);
-  String ss="";
+
+//  index.add(12);
+//  String ss="";
   
 //        String s= "ajd12";
 //        System.out.println(RE.isIdentefier(s));
@@ -56,193 +43,204 @@ public class CompilerScanner2 {
                
                 } }*/
         //System.out.println(ss);
-       ScannerGUI sc=new ScannerGUI();
-       sc.setVisible(true);
-       //DFAtoCode df=new DFAtoCode();
+       Lexeme l=new Lexeme(); 
+       //ScannerGUI sc=new ScannerGUI();
+       //sc.setVisible(true);
+       //String ss ="//";
+      //DFAtoCode df=new DFAtoCode();
         //char s ='||'  ;
-        //System.out.println(df.SymbolDFA(ss));
-        //Result(sc.scan);
-        //System.out.println(sc.scan);
+        String s="||/";
+        char State ='A';
 
-        //String s= " aj d12";
-        //System.out.println(RE.isIdentefier(s));
-        ////////////////////////////////////////////
-       
-//       Compilation c = new Compilation();
-//       
-//       String i="Ire@3num=5;";
-//        c.compile(i);    
+     for (char c:s.toCharArray()){
+        // System.out.println("char "+c);
+         
+         switch(State){
+             case('A'):{
+                 {
+                 if(c=='!'){
+                     State='B';
+                    
+                 }else if(c=='&'){
+                     State='C';
+                     
+                 }else if(c=='-'){
+                     State='D';
+                   
+                 }else if(c=='.'){
+                     State='E';  //FINAL
+                     
+                 }else if(c=='/'){
+                     State='F'; //FINAL
+                 }else if(c=='<'){
+                     State='G';//FINAL
+                 }else if(c=='='){
+                     State='H'; //FINAL WITH FINAL
+                 }else if(c=='>'){
+                     State='I';//FINAL WITH FINAL
+                 }else if(c=='*'){
+                     State='J';//FINAL WITH FINAL
+                 }else if(c=='+'){
+                     State='K';//FINAL
+                 }else if(c=='|'){
+                     State='L';
+                     
+                 }else if(c=='~'){
+                     State='M';//FINAL
+                 }
+                }
+                 }break;
+             case('B'):
+                 {
+                     if(c=='='){
+                         State='N';
+                     }
+                 
+                 }break;
+             case('C'):
+                 {
+                 if(c=='&'){
+                         State='O';
+                     }
+                 }break;
+             case('D'):{
+                 State='D';
+             }break;
+             case('E'):{
+                 State='E';
+             }break;
+             case('F'):{
+                System.out.println("/");;
+             }break;
+             case('G'):{
+               if(c=='='){
+                         State='P';
+                     }else{
+                   State='G';
+               }
+             }break;
+             case('H'):
+                 {
+                if(c=='='){
+                    State='Q';
+                     }else{
+                   State='H';
+               }
+             }break;
+             case('I'):  
+                 {
+                     if(c=='='){
+                         State='R';
+                     }else{
+                   State='I';
+               }
+                 
+             }break;
+             case('J'):  
+                 {
+                 State='J';
+             }break;
+             case('K'):  
+                 {
+                 State='K';
+             }break;
+             case('L'):  
+                 {
+                     if(c=='|'){
+                         State='S';
+                 }
+                 
+                 
+             }break;
+             case('M'):  
+                 {
+                 State='M';
+                 
+             }break;
+             case('N'):  
+                 {
+                 State='N';
+                 
+             }break;
+             case('O'):  
+                 {
+                 State='O';
+                 
+             }break;
+             case('P'):  
+                 {
+                 State='P';
+                 
+             }break;
+             case('Q'):  
+                 {
+                 State='Q';
+                 
+             }break;
+             case('R'):  
+                 {
+                 State='R';     
+             }break;
+             case('S'):  
+                 {
+                 System.out.println("||");
+                 State='A';
+             }break;
+             
                 
-     //Symbools
-//    String s ="/";
-//    char State ='A';
-//     for (char c : s.toCharArray()){
-//         switch(State){
-//             case('A'):{
-//                 {
-//                 if(c=='!'){
-//                     State='B';
-//                 }else if(c=='&'){
-//                     State='C';
-//                     
-//                 }else if(c=='-'){
-//                     State='D';
-//                 }else if(c=='.'){
-//                     State='E';  //FINAL
-//                 }else if(c=='/'){
-//                     State='F'; //FINAL
-//                 }else if(c=='<'){
-//                     State='G';//FINAL
-//                 }else if(c=='='){
-//                     State='H'; //FINAL WITH FINAL
-//                 }else if(c=='>'){
-//                     State='I';//FINAL WITH FINAL
-//                 }else if(c=='*'){
-//                     State='J';//FINAL WITH FINAL
-//                 }else if(c=='+'){
-//                     State='K';//FINAL
-//                 }else if(c=='|'){
-//                     State='L';
-//                 }else{
-//                     State='M';//FINAL
-//                 }
-//                }
-//                 }break;
-//             case('B'):
-//                 {
-//                     if(c=='='){
-//                         State='N';
-//                     }
-//                 
-//                 }break;
-//             case('C'):
-//                 {
-//                 if(c=='&'){
-//                         State='O';
-//                     }
-//                 
-//                
-//                 }break;
-//             case('D'):{
-//                 State='D';
-//             }break;
-//             case('E'):{
-//                 State='E';
-//             }break;
-//             case('F'):{
-//                State='F';
-//             }break;
-//             case('G'):{
-//               if(c=='='){
-//                         State='P';
-//                     }else{
-//                   State='G';
-//               }
-//             }break;
-//             case('H'):
-//                 {
-//                if(c=='='){
-//                         State='Q';
-//                     }else{
-//                   State='H';
-//               }
-//             }break;
-//             case('I'):  
-//                 {
-//                     if(c=='='){
-//                         State='R';
-//                     }else{
-//                   State='I';
-//               }
-//                 
-//             }break;
-//             case('J'):  
-//                 {
-//                 State='J';
-//             }break;
-//             case('K'):  
-//                 {
-//                 State='K';
-//             }break;
-//             case('L'):  
-//                 {
-//                     if(c=='|'){
-//                         State='S';
-//                     }
-//                 
-//                 
-//             }break;
-//             case('M'):  
-//                 {
-//                 State='M';
-//             }break;
-//             case('N'):  
-//                 {
-//                 State='N';
-//             }break;
-//             case('O'):  
-//                 {
-//                 State='O';
-//             }break;
-//             case('P'):  
-//                 {
-//                 State='P';
-//             }break;
-//             case('Q'):  
-//                 {
-//                 State='Q';
-//             }break;
-//             case('R'):  
-//                 {
-//                 State='R';
-//             }break;
-//             case('S'):  
-//                 {
-//                 State='S';
-//             }break;
-//          
-//         }
-//     }
-//     if (State=='D'){
-//         System.out.println("-");
-//     }else if(State=='E'){
-//         System.out.println(".");
-//     }else if(State=='F'){
-//         System.out.println("/");
-//     }else if(State=='G'){
-//         System.out.println("<");
-//     }else if(State=='H'){
-//         System.out.println("=");
-//     }else if(State=='I'){
-//         System.out.println(">");
-//     }else if(State=='J'){
-//         System.out.println("*");
-//     }else if(State=='K'){
-//         System.out.println("+");
-//     }
-//     else if(State=='M'){
-//         System.out.println("-");
-//     }
-//     else if(State=='N'){
-//         System.out.println("!=");
-//     }
-//     else if(State=='O'){
-//         System.out.println("&&");
-//     }
-//     else if(State=='p'){
-//         System.out.println("<=");
-//     }
-//     else if(State=='Q'){
-//         System.out.println("==");
-//     }
-//     else if(State=='R'){
-//         System.out.println(">=");
-//     }
-//     
-//     else {
-//         System.out.println("||");
-//     }
-//        
+         }
+         System.out.println("Char  "+c);
+         System.out.println("State  "+State);
+        /*   if (State=='E'){
+         System.out.println(".");         
+        }else if(State=='D'){
+            System.out.println("-");  
+         }else if(State=='F'){
+             System.out.println("/");  
+        }else if(State=='G'){
+            System.out.println("<");  
+        }else if(State=='H'){
+             System.out.println("=");  
+        }else if(State=='I'){
+             System.out.println(">");  
+        }else if(State=='J'){
+            System.out.println("*");  
+        }else if(State=='K'){
+            System.out.println("+");  
+        }
+         else if(State=='M'){
+            System.out.println("~");  
+        }
+        else if(State=='N'){
+            System.out.println("!=");  
+        }
+        else if(State=='O'){
+            System.out.println("&&");  
+         }
+         else if(State=='p'){
+            System.out.println("<=");  
+        }
+        else if(State=='Q'){
+            System.out.println("==");  
+        }
+        else if(State=='R'){
+            System.out.println(">=");  
+        }
+     
+     else if(State=='S'){
+        System.out.println("||");  
+     }
+    else{
+     System.out.println("F");  
+    } */
+     }
+         
+         
+       // System.out.println(State);
+         
+   
+     
+          
              
     
     

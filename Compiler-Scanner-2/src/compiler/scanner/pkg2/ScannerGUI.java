@@ -44,7 +44,7 @@ public class ScannerGUI extends javax.swing.JFrame {
   
    public ScannerGUI(){
        initComponents();
-       s= new TreeSet<String>(); 
+       s= new TreeSet<String>();      
        s.add("Divisio");
        s.add("DnferedFrom");
        s.add("WhetherDo-Else");
@@ -57,6 +57,24 @@ public class ScannerGUI extends javax.swing.JFrame {
        s.add("NoneValue");
        s.add("TerminateThisNow");
        s.add("RingWhen( ){\n\n\n\n\t}");
+       s.add("BackedValue");
+       s.add("STT");
+       s.add("Check–CaseOf");
+       s.add("End");
+       s.add("Beginning");
+       s.add("Using");
+       s.add("Divisio");
+       s.add("DnferedFrom");
+       s.add("WhetherDo-Else");
+       s.add("Ire");
+       s.add("Sire");
+       s.add("Clo");
+       s.add("SetOfClo");
+       s.add("FBU");
+       s.add("SFBU");
+       s.add("NoneValue");
+       s.add("TerminateThisNow");
+       s.add("RingWhen");
        s.add("BackedValue");
        s.add("STT");
        s.add("Check–CaseOf");
