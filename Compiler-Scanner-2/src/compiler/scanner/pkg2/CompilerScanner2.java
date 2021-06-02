@@ -19,7 +19,7 @@ public class CompilerScanner2 {
         DFA_Keywords dfk=new DFA_Keywords();
         DFA_For_Symbols dfs= new DFA_For_Symbols();
         DFA_Identifier dfi=new DFA_Identifier();
-        String s ="Ire@3num=5;";
+        String s ="Ire@decrease(){";
         dfk.keywordDFa(s);
         dfi.DFA_Constant(s);
         dfi.IdentifierDFA(s);

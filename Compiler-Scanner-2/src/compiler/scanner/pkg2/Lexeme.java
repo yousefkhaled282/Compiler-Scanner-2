@@ -158,6 +158,8 @@ class Lexeme {
             case ".":return "Access Operator";
             case "}":
             case "{":
+            case "(":
+            case ")":
             case "[":
             case "]":return "Braces";
             case "'": 
