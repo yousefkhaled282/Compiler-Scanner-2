@@ -5,6 +5,7 @@
  */
 package compiler.scanner.pkg2;
 
+<<<<<<< Updated upstream
 
 import static compiler.scanner.pkg2.Scanner.*;
 import java.io.File;
@@ -19,6 +20,8 @@ import java.util.Scanner;
 
 
 
+=======
+>>>>>>> Stashed changes
 public class CompilerScanner2 {
 
     /**
@@ -28,6 +31,7 @@ public class CompilerScanner2 {
        
         //RegularExpression RE = new RegularExpression();
 
+<<<<<<< Updated upstream
 //  index.add(12);
 //  String ss="";
   
@@ -61,3 +65,13 @@ public class CompilerScanner2 {
     
 
 }}
+=======
+        String s = "Ire@3num=5;";
+        DFA_For_Symbols df =new DFA_For_Symbols();
+        DFA_Lexema dl=new DFA_Lexema();
+        dl.LexemaDFA(s);
+        df.SymbolDFA(s);
+
+    }
+}
+>>>>>>> Stashed changes

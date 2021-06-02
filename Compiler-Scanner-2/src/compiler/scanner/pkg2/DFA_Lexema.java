@@ -826,12 +826,14 @@ public class DFA_Lexema {
             }
             
 //        System.out.println("inter "+i);
-            System.out.println("Char " + c);
-            System.out.println("State " + State);
-            if (State == "BA") {
-                System.out.println("Lexema");
-            }   
+            //System.out.println("Char " + c);
+           // System.out.println("State " + State);
+              
         }
+        if (State == "BA") {
+                System.out.println("Lexema");
+            } 
+        
         return result;
     }
 }
