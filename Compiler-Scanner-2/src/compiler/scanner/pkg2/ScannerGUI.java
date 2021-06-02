@@ -37,56 +37,58 @@ import javax.swing.text.Utilities;
  * @author lenovo
  */
 public class ScannerGUI extends javax.swing.JFrame {
+
     public String scan;
-    public String [] test=new String[5];
+    public String[] test = new String[5];
     public String path;
     Set<String> s;
     public String dataGen;
     public String TextString;
     public int start;
     public int end;
-  
-   public ScannerGUI(){
-       initComponents();
-       s= new TreeSet<String>();      
-       s.add("Divisio");
-       s.add("DnferedFrom");
-       s.add("WhetherDo-Else");
-       s.add("Ire");
-       s.add("Sire");
-       s.add("Clo");
-       s.add("SetOfClo");
-       s.add("FBU");
-       s.add("SFBU");
-       s.add("NoneValue");
-       s.add("TerminateThisNow");
-       s.add("RingWhen( ){\n\n\n\n\t}");
-       s.add("BackedValue");
-       s.add("STT");
-       s.add("Check–CaseOf");
-       s.add("End");
-       s.add("Beginning");
-       s.add("Using");
-       s.add("Divisio");
-       s.add("DnferedFrom");
-       s.add("WhetherDo-Else");
-       s.add("Ire");
-       s.add("Sire");
-       s.add("Clo");
-       s.add("SetOfClo");
-       s.add("FBU");
-       s.add("SFBU");
-       s.add("NoneValue");
-       s.add("TerminateThisNow");
-       s.add("RingWhen");
-       s.add("BackedValue");
-       s.add("STT");
-       s.add("Check–CaseOf");
-       s.add("End");
-       s.add("Beginning");
-       s.add("Using");
+    public int error;
 
-   }
+    public ScannerGUI() {
+        initComponents();
+        s = new TreeSet<String>();
+        s.add("Divisio");
+        s.add("DnferedFrom");
+        s.add("WhetherDo-Else");
+        s.add("Ire");
+        s.add("Sire");
+        s.add("Clo");
+        s.add("SetOfClo");
+        s.add("FBU");
+        s.add("SFBU");
+        s.add("NoneValue");
+        s.add("TerminateThisNow");
+        s.add("RingWhen( ){\n\n\n\n\t}");
+        s.add("BackedValue");
+        s.add("STT");
+        s.add("Check–CaseOf");
+        s.add("End");
+        s.add("Beginning");
+        s.add("Using");
+        s.add("Divisio");
+        s.add("DnferedFrom");
+        s.add("WhetherDo-Else");
+        s.add("Ire");
+        s.add("Sire");
+        s.add("Clo");
+        s.add("SetOfClo");
+        s.add("FBU");
+        s.add("SFBU");
+        s.add("NoneValue");
+        s.add("TerminateThisNow");
+        s.add("RingWhen");
+        s.add("BackedValue");
+        s.add("STT");
+        s.add("Check–CaseOf");
+        s.add("End");
+        s.add("Beginning");
+        s.add("Using");
+
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -109,8 +111,7 @@ public class ScannerGUI extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        errorLabel = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
@@ -181,7 +182,7 @@ public class ScannerGUI extends javax.swing.JFrame {
 
         jLabel1.setText("Type Here For Autocomplete");
 
-        jLabel2.setText("No. of Error");
+        errorLabel.setText("No. of Error");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -215,9 +216,7 @@ public class ScannerGUI extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(372, 372, 372)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addGap(493, 493, 493))
         );
@@ -229,11 +228,9 @@ public class ScannerGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
@@ -268,100 +265,108 @@ public class ScannerGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BrowseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BrowseButtonActionPerformed
-        if(evt.getSource()==BrowseButton){
-            JFileChooser fileChooser = new JFileChooser();			
-	    fileChooser.setCurrentDirectory(new File(".")); //sets current director
+        if (evt.getSource() == BrowseButton) {
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setCurrentDirectory(new File(".")); //sets current director
             int response = fileChooser.showOpenDialog(null); //select file to open
-	    //int response = fileChooser.showSaveDialog(null); //select file to save
-           Dictionary map=new Dictionary<Integer,String>();
-	    if(response == JFileChooser.APPROVE_OPTION){
-                path=fileChooser.getSelectedFile().getAbsolutePath();
-              String contents = null;
-                    try {
-                     contents = new String(Files.readAllBytes(Paths.get(path)));
-                    } catch (IOException e) {
-                     e.printStackTrace();
-                    }
-                    String[] lines = contents.split("\n");
-                       int num=0;
-            for (String line : lines) {
-                     map.add(num++, line);
-            }
-            int error=0;       String out="";
-             LinkedList <Integer> MapKeys=map.getKeys();
-            for(int i=0;i<MapKeys.getSize();i++){
-                  out+=compile_output((String) map.get(i),i+1);
-              error+=compile_error((String) map.get(i));
-           noLex=1;
-           
-           }       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
-                 String[] Result = out.split("\n");
-            for (String line : Result) {
-                String[] currencies = line.split("\t");
-               // System.out.println(currencies.length);
-                Object[] row = new Object[5];
-                for(int i=0;i<currencies.length;i++){        
-                       row[i]=currencies[i];    
+            //int response = fileChooser.showSaveDialog(null); //select file to save
+            Dictionary map = new Dictionary<Integer, String>();
+            if (response == JFileChooser.APPROVE_OPTION) {
+                path = fileChooser.getSelectedFile().getAbsolutePath();
+                String contents = null;
+                try {
+                    contents = new String(Files.readAllBytes(Paths.get(path)));
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
-           model.addRow(row);
-        }
-		System.out.println(error);
+                String[] lines = contents.split("\n");
+                int num = 0;
+                for (String line : lines) {
+                    map.add(num++, line);
+                }
+                error = 0;
+                String out = "";
+                LinkedList<Integer> MapKeys = map.getKeys();
+                for (int i = 0; i < MapKeys.getSize(); i++) {
+                    out += compile_output((String) map.get(i), i + 1);
+                    error += compile_error((String) map.get(i));
+                    noLex = 1;
+
+                }
+                DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
+                String[] Result = out.split("\n");
+                for (String line : Result) {
+                    String[] currencies = line.split("\t");
+                    // System.out.println(currencies.length);
+                    Object[] row = new Object[5];
+                    for (int i = 0; i < currencies.length; i++) {
+                        row[i] = currencies[i];
+                    }
+                    model.addRow(row);
+                }
+                System.out.println(error);
+                        String s=Integer.toString(error);
+        //System.out.print(out);
+        errorLabel.setText("No of errors : "+s);
             }
         }
     }//GEN-LAST:event_BrowseButtonActionPerformed
 
     private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
         //Input Scanner
-      DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
-model.setRowCount(0);
-noLex=1;
+        DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
+        model.setRowCount(0);
+        noLex = 1;
 
-        Dictionary map=new Dictionary<Integer,String>();
-         scan=TextArea.getText();
+        Dictionary map = new Dictionary<Integer, String>();
+        scan = TextArea.getText();
 
-        if(scan != null){
-         String[] lines = scan.split("\n");
-         int num=0;
+        if (scan != null) {
+            String[] lines = scan.split("\n");
+            int num = 0;
             for (String line : lines) {
-                if(line!=null){
-                     map.add(num++, line);
-                     
-                }
-                
-        }}
-       String out="";
-           int error=0;
+                if (line != null) {
+                    map.add(num++, line);
 
-           LinkedList <Integer> MapKeys=map.getKeys();
-           for(int i=0;i<MapKeys.getSize();i++){
-             out+=compile_output((String) map.get(i),i+1);
-             //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
-           error+=compile_error((String) map.get(i));
-           noLex=1;
-           }
-          System.out.print(error);
-         //System.out.print(out);
-         String[] lines = out.split("\n");
-            for (String line : lines) {
-                String[] currencies = line.split("\t");
-               // System.out.println(currencies.length);
-                Object[] row = new Object[5];
-                for(int i=0;i<currencies.length;i++){        
-                       row[i]=currencies[i];    
                 }
-         model.addRow(row);
-        }   
-            
+
+            }
+        }
+        String out = "";
+        error = 0;
+
+        LinkedList<Integer> MapKeys = map.getKeys();
+        for (int i = 0; i < MapKeys.getSize(); i++) {
+            out += compile_output((String) map.get(i), i + 1);
+            //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
+            error += compile_error((String) map.get(i));
+            noLex = 1;
+        }
+        System.out.print(error);
+        String s=Integer.toString(error);
+        //System.out.print(out);
+        errorLabel.setText("No of errors : "+s);
+        String[] lines = out.split("\n");
+        for (String line : lines) {
+            String[] currencies = line.split("\t");
+            // System.out.println(currencies.length);
+            Object[] row = new Object[5];
+            for (int i = 0; i < currencies.length; i++) {
+                row[i] = currencies[i];
+            }
+            model.addRow(row);
+        }
+
     }//GEN-LAST:event_ScanButtonActionPerformed
 
     private void CommentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CommentButtonActionPerformed
-                                            
+
         // TODO add your handling code here:
         int line = 0;
         try {
-        int offset = TextArea.getCaretPosition();
-        line = TextArea.getLineOfOffset(offset);
-        System.out.println(line + 1);
+            int offset = TextArea.getCaretPosition();
+            line = TextArea.getLineOfOffset(offset);
+            System.out.println(line + 1);
         } catch (BadLocationException ex) {
             Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -371,28 +376,24 @@ noLex=1;
 
         int start = contentEl.getStartOffset();
         int end = contentEl.getEndOffset();
-        
+
         // remove words in the line (-1 to prevent removing newline character)
         String txt;
         try {
             txt = doc.getText(start, end - start - 1);
-        
-        if(txt == null){
-            doc.remove(start, end - start - 1);
-            doc.insertString(start,"/-"+txt, null);
-        }
-        else if(txt != null && txt.indexOf("/-") == 0)
-        {
-            doc.remove(start, end - start - 1);
-            txt = "" + txt.substring(1, txt.length());
-            txt = "" + txt.substring(1, txt.length());
-            doc.insertString(start,""+txt, null);
-        }
-        else
-        {
-            doc.remove(start, end - start - 1);
-            doc.insertString(start,"/-" + (txt != null ? txt : ""), null);
-        }
+
+            if (txt == null) {
+                doc.remove(start, end - start - 1);
+                doc.insertString(start, "/-" + txt, null);
+            } else if (txt != null && txt.indexOf("/-") == 0) {
+                doc.remove(start, end - start - 1);
+                txt = "" + txt.substring(1, txt.length());
+                txt = "" + txt.substring(1, txt.length());
+                doc.insertString(start, "" + txt, null);
+            } else {
+                doc.remove(start, end - start - 1);
+                doc.insertString(start, "/-" + (txt != null ? txt : ""), null);
+            }
         } catch (BadLocationException ex) {
             Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -400,8 +401,8 @@ noLex=1;
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
-         
-        
+
+
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -411,38 +412,31 @@ noLex=1;
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
         // TODO add your handling code here:
-         if(evt.getKeyCode()==KeyEvent.VK_BACK_SPACE||evt.getKeyCode()==KeyEvent.VK_DELETE)
-        {
-           
-        }
-        else
-        {   
-            String to_check=jTextField1.getText();
-            int to_check_len=to_check.length();
-            for(String data:s)
-            {
-                String check_from_data="";
-                for(int i=0;i<to_check_len;i++)
-                {
-                    if(to_check_len<=data.length())
-                    {
-                        check_from_data = check_from_data+data.charAt(i);
+        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
+
+        } else {
+            String to_check = jTextField1.getText();
+            int to_check_len = to_check.length();
+            for (String data : s) {
+                String check_from_data = "";
+                for (int i = 0; i < to_check_len; i++) {
+                    if (to_check_len <= data.length()) {
+                        check_from_data = check_from_data + data.charAt(i);
                     }
                 }
                 //System.out.print(check_from_data);
-                if(check_from_data.equals(to_check))
-                {
+                if (check_from_data.equals(to_check)) {
                     System.out.print("Found");
-                    
+
                     jTextField1.setText(data);
-                    dataGen=data;
+                    dataGen = data;
                     jTextField1.setSelectionStart(to_check_len);
                     jTextField1.setSelectionEnd(data.length());
                     break;
-                    
+
                 }
             }
-        } 
+        }
     }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
@@ -486,14 +480,13 @@ noLex=1;
     private javax.swing.JTable OutputTable;
     private javax.swing.JButton ScanButton;
     private javax.swing.JTextArea TextArea;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
