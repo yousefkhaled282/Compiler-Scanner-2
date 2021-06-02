@@ -5,6 +5,8 @@
  */
 package compiler.scanner.pkg2;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author lenovo
@@ -14,49 +16,64 @@ public class DFA_Identifier {
     public void IdentifierDFA(String s) {
         RegularExpression reg = new RegularExpression();
         char state = 'A';
+         ArrayList<Character> ch = new ArrayList<>();//Arraylist for add found Lexemes
         for (char c:s.toCharArray()) {
             switch (state) {
                 case ('A'): {
                     if (reg.isAlaphabet(c)) {
                         state = 'B';
+                        ch.add(c);
                     }else{
                         state='F';
+                        ch.add(c);
                     }
                 }break;
                 case ('B'): {
                     if (reg.isAlaphabet(c)) {
-                        state = 'D';
+                        state = 'D';  
+                        ch.add(c);
+
                         
                     } else if (reg.isNumber(c)) {
                         state = 'C';
+                                                ch.add(c);
+
                     }
                 }break;
                 case ('C'): {
                     if (reg.isAlaphabet(c)) {
-                        state = 'D';
+                        state = 'D';                   
+                        ch.add(c);
+
                     } else if (reg.isNumber(c)) {
                         state = 'C';
+                          ch.add(c);
+
                     }
                 }break;
                 case ('D'): {
                    if (reg.isAlaphabet(c)) {
-                       state = 'D';
+                       state = 'D';   
+                       ch.add(c);
+
                     } else if (reg.isNumber(c)) {
                         state = 'C';
+                        ch.add(c);
+
                     }
               }break;
             }
         }
         if (state == 'B') {
-            System.out.println("identifier");
+            System.out.println("identifier"+ch);
         } else if (state == 'C') {
             System.out.println("identifier");
 
         } else if (state == 'D') {
-            System.out.println("Identifier");
+            System.out.println("Identifier"+ch);
 
         } else {
-            System.out.println("Not identifier");
+            System.out.println("Not identifier"+ch);
             
         }
        

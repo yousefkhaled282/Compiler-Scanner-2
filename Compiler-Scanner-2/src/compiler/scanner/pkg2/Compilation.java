@@ -57,8 +57,9 @@ public class Compilation {
         //System.out.println(lex);
         L.isLex(lex);
         if( L.isLex(lex)==true){
-        symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";}else{
-        symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Not Matched"+"\n";
+       // symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";
+        }else{
+        //symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Not Matched"+"\n";
         }
         //System.out.println("Token is\t"+L.getToken(lex)); 
         //For loop for relational sumbol and logic symbol
@@ -94,7 +95,7 @@ public class Compilation {
             if(L.isLex(varStr)){
                 //System.out.println("Symbol "+varStr+ " is "+L.getToken(varStr));
                 noLex++;
-                symbols+=x+"\t"+varchar+"\t"+L.getToken(varStr)+"\t"+noLex+"\t"+"Matched"+"\n";
+               // symbols+=x+"\t"+varchar+"\t"+L.getToken(varStr)+"\t"+noLex+"\t"+"Matched"+"\n";
 
             }
             

@@ -6,7 +6,11 @@
 package compiler.scanner.pkg2;
 
 import static compiler.scanner.pkg2.Compilation.compile_output;
+import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
+
 import static compiler.scanner.pkg2.Compilation.compile_error;
+import static compiler.scanner.pkg2.DFA_For_Symbols.SymbolDFA;
+import static compiler.scanner.pkg2.DFA_Keywords.keywordDFa;
 import static compiler.scanner.pkg2.Scanner.Result;
 import static compiler.scanner.pkg2.Scanner.error;
 import java.awt.Font;
@@ -291,6 +295,8 @@ public class ScannerGUI extends javax.swing.JFrame {
         //Input Scanner
       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
 model.setRowCount(0);
+noLex=1;
+
         Dictionary map=new Dictionary<Integer,String>();
          scan=TextArea.getText();
                 int error=0;
@@ -308,9 +314,10 @@ model.setRowCount(0);
        String out="";
            LinkedList <Integer> MapKeys=map.getKeys();
            for(int i=0;i<MapKeys.getSize();i++){
-             out+=compile_output((String) map.get(i),i+1);
-                         
+             //out+=compile_output((String) map.get(i),i+1);
+             out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
            error+=compile_error((String) map.get(i));
+           noLex=0;
            }
           System.out.print(error);
          //System.out.print(out);

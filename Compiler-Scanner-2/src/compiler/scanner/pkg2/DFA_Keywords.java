@@ -5,15 +5,18 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
+
 /**
  *
  * @author mode_
  */
 public class DFA_Keywords {
 
-    public void keywordDFa(String s) {
+    public static String keywordDFa(String s,int NoLine) {
         String State = "A";
         Lexeme L = new Lexeme();
+        String KeyWordOutput="";
         for (char c : s.toCharArray()) {
             switch (State) {
 ///////////////////------=---------------cOLUM1---------------------------------------------------------------------------------------------------////                
@@ -1272,59 +1275,47 @@ public class DFA_Keywords {
                 break;
             }//end  switch
                 if (State == "DK") {
-
-                    System.out.println(L.getToken("BackedValue"));
+                          KeyWordOutput+=NoLine+"\t"+"BackedValue"+"\t"+L.getToken("BackedValue")+"\t"+noLex+"\t"+"Matched"+"\n";
 
                 } else if (State == "CZ") {
-                    System.out.println(L.getToken("Beginning"));
-
+                   KeyWordOutput+=NoLine+"\t"+"Beginning"+"\t"+L.getToken("Beginning")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "DP") {
-                    System.out.println(L.getToken("Check-CaseOf"));
-
-                } else if (State == "AI") {
-                    System.out.println(L.getToken("Clo"));
-
+                     KeyWordOutput+=NoLine+"\t"+"Check-CaseOf"+"\t"+L.getToken("Check-CaseOf")+"\t"+noLex+"\t"+"Matched"+"\n";
+                } else if (State == "AI") {             
+                     KeyWordOutput+=NoLine+"\t"+"Clo"+"\t"+L.getToken("Clo")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "CI") {
-                    System.out.println(L.getToken("Divisio"));
-
+                     KeyWordOutput+=NoLine+"\t"+"Divisio"+"\t"+L.getToken("Divisio")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "AK") {
-                    System.out.println(L.getToken("End"));
-
+                    KeyWordOutput+=NoLine+"\t"+"End"+"\t"+L.getToken("End")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "AL") {
-                    System.out.println(L.getToken("FBU"));
-
+                     KeyWordOutput+=NoLine+"\t"+"FBU"+"\t"+L.getToken("FBU")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "DM") {
-                    System.out.println(L.getToken("InferedFrom"));
-
+                     KeyWordOutput+=NoLine+"\t"+"InferedFrom"+"\t"+L.getToken("InferedFrom")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "AN") {
-                    System.out.println(L.getToken("Ire"));
+                      KeyWordOutput+=NoLine+"\t"+"Ire"+"\t"+L.getToken("Ire")+"\t"+noLex+"\t"+"Matched"+"\n";
+                   // System.out.println(L.getToken("Ire"));
 
                 } else if (State == "DC") {
-                    System.out.println(L.getToken("NoneValue"));
-
+                    KeyWordOutput+=NoLine+"\t"+"NoneValue"+"\t"+L.getToken("NoneValue")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "CU") {
-                    System.out.println(L.getToken("RingWhen"));
-
+                   KeyWordOutput+=NoLine+"\t"+"RingWhen"+"\t"+L.getToken("RingWhen")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "BE") {
-                    System.out.println(L.getToken("SFBU"));
-
+                    KeyWordOutput+=NoLine+"\t"+"SFBU"+"\t"+L.getToken("SFBU")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "AR") {
-                    System.out.println(L.getToken("STT"));
-
+                     KeyWordOutput+=NoLine+"\t"+"STT"+"\t"+L.getToken("STT")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "CV") {
-                    System.out.println(L.getToken("SetOfClo"));
-
+                    KeyWordOutput+=NoLine+"\t"+"SetOfClo"+"\t"+L.getToken("SetOfClo")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "BG") {
-                    System.out.println(L.getToken("Sire"));
-
+                     KeyWordOutput+=NoLine+"\t"+"Sire"+"\t"+L.getToken("Sire")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "DX") {
-                    System.out.println(L.getToken("TerminateThisNow"));
-
+                     KeyWordOutput+=NoLine+"\t"+"TerminateThisNow"+"\t"+L.getToken("TerminateThisNow")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "BT") {
-                    System.out.println(L.getToken("Using"));
+                     KeyWordOutput+=NoLine+"\t"+"Using"+"\t"+L.getToken("Using")+"\t"+noLex+"\t"+"Matched"+"\n";
+                    //System.out.println(L.getToken("Using"));
 
                 } else if (State == "DV") {
-                    System.out.println(L.getToken("WhetherDo-Else"));
+                     KeyWordOutput+=NoLine+"\t"+"WhetherDo-Else"+"\t"+L.getToken("WhetherDo-Else")+"\t"+noLex+"\t"+"Matched"+"\n";
+                    //System.out.println(L.getToken("WhetherDo-Else"));
 
                 } 
 
@@ -2370,6 +2361,7 @@ public class DFA_Keywords {
                 }//end  2nd switch
             }//endif
         }//end for
+        return  KeyWordOutput;
 
     }//end fn
 }

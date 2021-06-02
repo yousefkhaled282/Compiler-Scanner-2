@@ -2,10 +2,10 @@
 package compiler.scanner.pkg2;
 
 public class DFA_For_Symbols {
-
-    Lexeme L = new Lexeme();
-
-    public void SymbolDFA(String s) {
+    public static int noLex=0;
+    public static String SymbolDFA(String s,int NoLine) {
+            Lexeme L = new Lexeme();
+String SymbolOutput="";
         char State = 'A';
         for (char c : s.toCharArray()) {
             // System.out.println("char "+c);
@@ -223,78 +223,95 @@ public class DFA_For_Symbols {
             }
             //------------------------------------------- Output-------------------------------------/////  
             //System.out.println("State  " + State);
+            
             if (State == 'W') {
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+"!="+"\t"+L.getToken("!=")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-                System.out.println(L.getToken("!="));
-
-            } else if (State == 'X') {
-                System.out.println(L.getToken("&&"));
+            } else if (State == 'X') {   
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+"&&"+"\t"+L.getToken("&&")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } else if (State == 'D') {
-                System.out.println(L.getToken(","));
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+","+"\t"+L.getToken(",")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } else if (State == 'E') {
-                System.out.println(L.getToken("-"));
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+"-"+"\t"+L.getToken("-")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } else if (State == 'F') {
-                System.out.println(L.getToken("."));
-
+                  noLex++;              
+              SymbolOutput+=NoLine+"\t"+"."+"\t"+L.getToken(".")+"\t"+noLex+"\t"+"Matched"+"\n";
             } else if (State == 'G') {
-                System.out.println(L.getToken("/"));
-
+                noLex++;                
+                SymbolOutput+=NoLine+"\t"+"/"+"\t"+L.getToken("/")+"\t"+noLex+"\t"+"Matched"+"\n";
             } else if (State == 'H') {
-                System.out.println(L.getToken(")"));
+                noLex++;
+             SymbolOutput+=NoLine+"\t"+")"+"\t"+L.getToken(")")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } else if (State == 'I') {
-                System.out.println(L.getToken("("));
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+"("+"\t"+L.getToken("(")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            }else if (State == 'J') {
-                System.out.println(L.getToken(";"));
+            }else if (State == 'J') {   
+                noLex++;
 
+               SymbolOutput+=NoLine+"\t"+";"+"\t"+L.getToken(";")+"\t"+noLex+"\t"+"Matched"+"\n";
             } else if (State == 'K') {
-                System.out.println(L.getToken("<"));
-
+                noLex++;
+                SymbolOutput+=NoLine+"\t"+"<"+"\t"+L.getToken("<")+"\t"+noLex+"\t"+"Matched"+"\n";
             } else if (State == 'Y') {
-                System.out.println(L.getToken("<="));
+                                noLex++;
+                SymbolOutput+=NoLine+"\t"+"<="+"\t"+L.getToken("<=")+"\t"+noLex+"\t"+"Matched"+"\n";
+            } else if (State == 'L') {                noLex++;
 
-            } else if (State == 'L') {
-                System.out.println(L.getToken("="));
+               SymbolOutput+=NoLine+"\t"+"="+"\t"+L.getToken("=")+"\t"+noLex+"\t"+"Matched"+"\n";
+            } else if (State == 'Z') {                noLex++;
 
-            } else if (State == 'Z') {
-                System.out.println(L.getToken("=="));
+               SymbolOutput+=NoLine+"\t"+"=="+"\t"+L.getToken("==")+"\t"+noLex+"\t"+"Matched"+"\n";
+            } else if (State == 'M') {                noLex++;
 
-            } else if (State == 'M') {
-                System.out.println(L.getToken(">"));
+              SymbolOutput+=NoLine+"\t"+">"+"\t"+L.getToken(">")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            } else if (State == '1') {
-                System.out.println(L.getToken(">="));
+            } else if (State == '1') {                noLex++;
 
-            } else if (State == 'N') {
-                System.out.println(L.getToken("@"));
+               SymbolOutput+=NoLine+"\t"+">="+"\t"+L.getToken(">=")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            } else if (State == 'O') {
-                System.out.println(L.getToken("*"));
+            } else if (State == 'N') {                noLex++;
 
-            } else if (State == 'P') {
-                System.out.println(L.getToken("+"));
+                SymbolOutput+=NoLine+"\t"+"@"+"\t"+L.getToken("@")+"\t"+noLex+"\t"+"Matched"+"\n";
+            } else if (State == 'O') {                noLex++;
 
-            } else if (State == 'Q') {
-                System.out.println(L.getToken("["));
+                SymbolOutput+=NoLine+"\t"+"*"+"\t"+L.getToken("*")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            } else if (State == 'R') {
-                System.out.println(L.getToken("]"));
+            } else if (State == 'P') {                noLex++;
 
-            } else if (State == '2') {
-                System.out.println(L.getToken("||"));
+                SymbolOutput+=NoLine+"\t"+"+"+"\t"+L.getToken("+")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            } else if (State == 'T') {
-                System.out.println(L.getToken("}"));
+            } else if (State == 'Q') {                noLex++;
 
-            } else if (State == 'U') {
-                System.out.println(L.getToken("{"));
+                SymbolOutput+=NoLine+"\t"+"["+"\t"+L.getToken("[")+"\t"+noLex+"\t"+"Matched"+"\n";
 
-            } else if (State == 'V') {
-                System.out.println(L.getToken("~"));
+            } else if (State == 'R') {                noLex++;
+
+                SymbolOutput+=NoLine+"\t"+"]"+"\t"+L.getToken("]")+"\t"+noLex+"\t"+"Matched"+"\n";
+
+            } else if (State == '2') {                noLex++;
+
+               SymbolOutput+=NoLine+"\t"+"||"+"\t"+L.getToken("||")+"\t"+noLex+"\t"+"Matched"+"\n";
+
+            } else if (State == 'T') {                noLex++;
+
+                SymbolOutput+=NoLine+"\t"+"}"+"\t"+L.getToken("}")+"\t"+noLex+"\t"+"Matched"+"\n";
+
+            } else if (State == 'U') {                noLex++;
+
+                SymbolOutput+=NoLine+"\t"+"{"+"\t"+L.getToken("{")+"\t"+noLex+"\t"+"Matched"+"\n";
+
+            } else if (State == 'V') {                noLex++;
+
+                SymbolOutput+=NoLine+"\t"+"~"+"\t"+L.getToken("~")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } 
 //            else {
@@ -520,5 +537,6 @@ public class DFA_For_Symbols {
         }
 
         //System.out.println("Char  "+c);
+        return SymbolOutput;
     }
 }
