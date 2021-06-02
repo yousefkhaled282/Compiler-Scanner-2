@@ -13,36 +13,9 @@ RE = { .* } | ( .* ) | [ .* ] | @ | ;
 STT, Check-CaseOf Beginning End
   (keyword@)?(I|S)*;
 
-<<<<<<< Updated upstream
-Divisio identifier 
-
-identifier InferredFrom identifier
-
-WhetherDo ( (identifier | [0-9]) operator (identifier | [0-9]) ) { .*;* }
-
-Else{ .* ;*}
-
-Check (identifier | [0-9]){ (CaseOf (identifier | [0-9]))+: .* ;* }
-
-RingWhen ((identifier | [0-9]) operator (identifier | [0-9])) { .* }
-
-BackedValue identifer | [0-9]
-
-datatype identifier ; | datatype identifier = constant (,identifier)*
-
-
-
-p-->+  m-->*   ||-->oo   b==>left bracket  B-->right bracket
-
-
-
-(lexeme|identifier)
-
-
-
-
-=======
 I=(L(L|D)
 S=(+|-|*|/|&&|~||||=|.|==|<|>|<=|>+|!=|{|}|(|)|[|])|,
 (Divisio@|InferedFrom@|WhetherDo-Else@|Ire@|Sire@|Clo@|SetOfClo@|FBU@|SFBU@|NoneValue@|TerminateThisNow@|RingWhen@|BackedValue@|STT@|Check–CaseOf@|Beginning@|End@|Using@)?((L(L|D)|(P|-|M|/|&&|~|oo|=|.|==|<|>|<=|>+|!=|{|}|b|p|[|])|,))
->>>>>>> Stashed changes
+(P|-|M|/|&&|~|oo|=|.|==|<|>|<=|>=|!=|{|}|9|0|[|]|,|@|;)
+
+public static final String[] Symbols={ "+","-", "*", "/","=",";",">","<","{","}","[","]","@","~",".","(",")"};
