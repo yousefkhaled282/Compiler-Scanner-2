@@ -5,73 +5,26 @@
  */
 package compiler.scanner.pkg2;
 
-<<<<<<< Updated upstream
-
-import static compiler.scanner.pkg2.Scanner.*;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Scanner;
 
 
 
 
 
-
-=======
->>>>>>> Stashed changes
 public class CompilerScanner2 {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-       
-        //RegularExpression RE = new RegularExpression();
-
-<<<<<<< Updated upstream
-//  index.add(12);
-//  String ss="";
-  
-//        String s= "ajd12";
-//        System.out.println(RE.isIdentefier(s));
-        /*for (int i=0;i<index.size()-1;i++){
-           
-            if(index.get(i)+1==index.get(i+1)){
-                char vars=symbol.get(i);
-                char var1=symbol.get(i+1); 
-                 
-                ss=new StringBuilder().append(vars).append(var1).toString();
-               
-                } }*/
-        //System.out.println(ss);
-       Lexeme l=new Lexeme(); 
-       //ScannerGUI sc=new ScannerGUI();
-       //sc.setVisible(true);
-       //String ss ="//";
-      //DFAtoCode df=new DFAtoCode();
-        //char s ='||';
-        DFA_Identifier iden=new DFA_Identifier();
+        DFA_Keywords dfk=new DFA_Keywords();
+        DFA_For_Symbols dfs= new DFA_For_Symbols();
+        DFA_Identifier dfi=new DFA_Identifier();
+        String s ="Ire@3num=5;";
+        dfk.keywordDFa(s);
+        dfi.DFA_Constant(s);
+        dfi.IdentifierDFA(s);
+        dfs.SymbolDFA(s);
         
-         String s="hhh";
-         iden.DFA_Constant(s);
-
-                
-    
-    
-    
-    
 
 }}
-=======
-        String s = "Ire@3num=5;";
-        DFA_For_Symbols df =new DFA_For_Symbols();
-        DFA_Lexema dl=new DFA_Lexema();
-        dl.LexemaDFA(s);
-        df.SymbolDFA(s);
 
-    }
-}
->>>>>>> Stashed changes

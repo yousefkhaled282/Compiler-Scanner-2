@@ -169,7 +169,7 @@ public class DFA_For_Symbols {
                 break;
                 case ('S'): {
 
-                    if (c == '0') {
+                    if (c == '|') {
                         State = '2';//Final State
                     }
 
@@ -291,7 +291,7 @@ public class DFA_For_Symbols {
                 System.out.println(L.getToken("}"));
 
             } else if (State == 'U') {
-                System.out.println(L.getToken("}"));
+                System.out.println(L.getToken("{"));
 
             } else if (State == 'V') {
                 System.out.println(L.getToken("~"));
@@ -463,7 +463,7 @@ public class DFA_For_Symbols {
                     break;
                     case ('S'): {
 
-                        if (c == '0') {
+                        if (c == '|') {
                             State = '2';//Final State
                         }
 
