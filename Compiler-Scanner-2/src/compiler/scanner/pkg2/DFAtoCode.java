@@ -10,51 +10,52 @@ package compiler.scanner.pkg2;
  * @author mode_
  */
 public class DFAtoCode {
-    public boolean SymbolDFA(String s){
+    public void SymbolDFA(String s){
      
     char State ='A';
-     for (char c : s.toCharArray()){
+    char[] c = s.toCharArray();//[=,=,+,*]
+     for (int i=0;i<c.length;i++){
          switch(State){
              case('A'):{
                  {
-                 if(c=='!'){
+                 if(c[i]=='!'){
                      State='B';
-                 }else if(c=='&'){
+                 }else if(c[i]=='&'){
                      State='C';
                      
-                 }else if(c=='-'){
+                 }else if(c[i]=='-'){
                      State='D';
-                 }else if(c=='.'){
+                 }else if(c[i]=='.'){
                      State='E';  //FINAL
-                 }else if(c=='/'){
+                 }else if(c[i]=='/'){
                      State='F'; //FINAL
-                 }else if(c=='<'){
+                 }else if(c[i]=='<'){
                      State='G';//FINAL
-                 }else if(c=='='){
+                 }else if(c[i]=='='){
                      State='H'; //FINAL WITH FINAL
-                 }else if(c=='>'){
+                 }else if(c[i]=='>'){
                      State='I';//FINAL WITH FINAL
-                 }else if(c=='*'){
+                 }else if(c[i]=='*'){
                      State='J';//FINAL WITH FINAL
-                 }else if(c=='+'){
+                 }else if(c[i]=='+'){
                      State='K';//FINAL
-                 }else if(c=='|'){
+                 }else if(c[i]=='|'){
                      State='L';
-                 }else if(c=='~'){
+                 }else if(c[i]=='~'){
                      State='M';//FINAL
                  }
                 }
                  }break;
              case('B'):
                  {
-                     if(c=='='){
+                     if(c[i]=='='){
                          State='N';
                      }
                  
                  }break;
              case('C'):
                  {
-                 if(c=='&'){
+                 if(c[i]=='&'){
                          State='O';
                      }
                  
@@ -70,7 +71,7 @@ public class DFAtoCode {
                 State='F';
              }break;
              case('G'):{
-               if(c=='='){
+               if(c[i]=='='){
                          State='P';
                      }else{
                    State='G';
@@ -78,7 +79,7 @@ public class DFAtoCode {
              }break;
              case('H'):
                  {
-                if(c=='='){
+                if(c[i]=='='){
                          State='Q';
                      }else{
                    State='H';
@@ -86,7 +87,7 @@ public class DFAtoCode {
              }break;
              case('I'):  
                  {
-                     if(c=='='){
+                     if(c[i]=='='){
                          State='R';
                      }else{
                    State='I';
@@ -103,7 +104,7 @@ public class DFAtoCode {
              }break;
              case('L'):  
                  {
-                     if(c=='|'){
+                     if(c[i]=='|'){
                          State='S';
                      }
                  
@@ -141,45 +142,45 @@ public class DFAtoCode {
          }
      }
      if (State=='E'){
-         return true;
+         System.out.println("E");         
      }else if(State=='D'){
-         return true;
+        System.out.println("d");  
      }else if(State=='F'){
-         return true;
+         System.out.println("f");  
      }else if(State=='G'){
-         return true;
+        System.out.println("g");  
      }else if(State=='H'){
-         return true;
+         System.out.println("h");  
      }else if(State=='I'){
-         return true;
+        System.out.println("i");  
      }else if(State=='J'){
-         return true;
+         System.out.println("j");  
      }else if(State=='K'){
-         return true;
+         System.out.println("k");  
      }
      else if(State=='M'){
-         return true;
+        System.out.println("m");  
      }
      else if(State=='N'){
-         return true;
+         System.out.println("n");  
      }
      else if(State=='O'){
-         return true;
+        System.out.println("o");  
      }
      else if(State=='p'){
-         return true;
+         System.out.println("p");  
      }
      else if(State=='Q'){
-         return true;
+         System.out.println("q");  
      }
      else if(State=='R'){
-        return true;
+        System.out.println("r");  
      }
      
      else if(State=='S'){
-        return true;
+        System.out.println("s");  
      }
     else{
-    return false;
+     System.out.println("Flase");  
     }
 }}

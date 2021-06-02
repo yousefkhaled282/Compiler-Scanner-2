@@ -11,7 +11,9 @@ RE = { .* } | ( .* ) | [ .* ] | @ | ;
 
 4- keywords: Using, Divisio, InferredFrom, WhetherDo-Else, Sire, Clo, SetOfClo, FBU, SFBU, NoneValue, TerminateThisNow, RignWhen, BackedValue
 STT, Check-CaseOf Beginning End
+  (keyword@)?(I|S)*;
 
+<<<<<<< Updated upstream
 Divisio identifier 
 
 identifier InferredFrom identifier
@@ -39,3 +41,8 @@ p-->+  m-->*   ||-->oo   b==>left bracket  B-->right bracket
 
 
 
+=======
+I=(L(L|D)
+S=(+|-|*|/|&&|~||||=|.|==|<|>|<=|>+|!=|{|}|(|)|[|])|,
+(Divisio@|InferedFrom@|WhetherDo-Else@|Ire@|Sire@|Clo@|SetOfClo@|FBU@|SFBU@|NoneValue@|TerminateThisNow@|RingWhen@|BackedValue@|STT@|Check–CaseOf@|Beginning@|End@|Using@)?((L(L|D)|(P|-|M|/|&&|~|oo|=|.|==|<|>|<=|>+|!=|{|}|b|p|[|])|,))
+>>>>>>> Stashed changes
