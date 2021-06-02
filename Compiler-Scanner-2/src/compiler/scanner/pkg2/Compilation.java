@@ -5,6 +5,8 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.DFA_For_Symbols.SymbolDFA;
+import static compiler.scanner.pkg2.DFA_Keywords.keywordDFa;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +30,8 @@ public class Compilation {
             symbols+=x+"\t"+"/-"+"\t"+L.getToken("/-")+"\t"+1+"\t"+"Matched"+"\n";
             return symbols;
         }else{
-          
+
+
      int noLex=1;
         for (char ch : s1.toCharArray()) {
             c.add(ch);
@@ -59,7 +62,7 @@ public class Compilation {
         if( L.isLex(lex)==true){
        // symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Matched"+"\n";
         }else{
-        //symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+1+"\t"+"Not Matched"+"\n";
+           symbols+=x+"\t"+lex+"\t"+L.getToken(lex)+"\t"+noLex+"\t"+"Not Matched"+"\n";
         }
         //System.out.println("Token is\t"+L.getToken(lex)); 
         //For loop for relational sumbol and logic symbol
@@ -86,6 +89,7 @@ public class Compilation {
               symbol.add(var);
             }
         }
+                    symbols+=keywordDFa(s1,x);
         //for loop for Print Symbols and its token
         for (int i =0 ; i<symbol.size();i++){
             
@@ -111,7 +115,7 @@ public class Compilation {
             //add 0 in Index 0
             index.add(0,0);
             //Add @ symbol in the begininng of line
-            String s ="@"+s1;
+            String s =s1;
              for (char ch : s.toCharArray()) {
                 c1.add(ch);
             }
@@ -151,8 +155,9 @@ public class Compilation {
          String iden = S_indentifier.toString();
          String [] arr= iden.split("/");//array string that we solit each identifier
          //For loop to split each identifer
-         for (int i =0;i<arr.length;i++){
-             
+                    symbols+=SymbolDFA(s1,x);
+
+         for (int i =0;i<arr.length;i++){            
              if(RE.isIdentefier(arr[i])){
                  noLex++;
                   symbols+=x+"\t"+arr[i]+ "\t"+"Indentifier"+"\t"+noLex+"\t"+"Matched"+"\n";
@@ -163,6 +168,7 @@ public class Compilation {
 
                  //System.out.println(arr[i]+" is Constant");
             }else{
+                 
                  //System.out.println(arr[i]+" is not Indentifier");
              }
          }
@@ -209,7 +215,7 @@ public class Compilation {
         String lex = sb.toString();
         System.out.println(lex);
         if( L.isLex(lex)==true){
-            error--;
+            //error--;
         }else{
             error++;
        

@@ -299,7 +299,6 @@ noLex=1;
 
         Dictionary map=new Dictionary<Integer,String>();
          scan=TextArea.getText();
-                int error=0;
 
         if(scan != null){
          String[] lines = scan.split("\n");
@@ -312,12 +311,14 @@ noLex=1;
                 
         }}
        String out="";
+           int error=0;
+
            LinkedList <Integer> MapKeys=map.getKeys();
            for(int i=0;i<MapKeys.getSize();i++){
-             //out+=compile_output((String) map.get(i),i+1);
-             out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
+             out+=compile_output((String) map.get(i),i+1);
+             //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
            error+=compile_error((String) map.get(i));
-           noLex=0;
+           noLex=1;
            }
           System.out.print(error);
          //System.out.print(out);
