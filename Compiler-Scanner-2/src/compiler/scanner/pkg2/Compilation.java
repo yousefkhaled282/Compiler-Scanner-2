@@ -172,7 +172,6 @@ public class Compilation {
                  //System.out.println(arr[i]+" is not Indentifier");
              }
          }
-         System.out.println(symbols);
          return symbols;
         } } 
    

@@ -272,9 +272,10 @@ public class ScannerGUI extends javax.swing.JFrame {
             int error=0;       String out="";
              LinkedList <Integer> MapKeys=map.getKeys();
             for(int i=0;i<MapKeys.getSize();i++){
-                 out+=compile_output((String) map.get(i),i+1);
-                         
-                   error+=compile_error((String) map.get(i));
+                  out+=compile_output((String) map.get(i),i+1);
+              error+=compile_error((String) map.get(i));
+           noLex=1;
+           
            }       DefaultTableModel model = (DefaultTableModel)OutputTable.getModel();
                  String[] Result = out.split("\n");
             for (String line : Result) {
@@ -284,9 +285,9 @@ public class ScannerGUI extends javax.swing.JFrame {
                 for(int i=0;i<currencies.length;i++){        
                        row[i]=currencies[i];    
                 }
-         model.addRow(row);
+           model.addRow(row);
         }
-		System.out.println(path);
+		System.out.println(error);
             }
         }
     }//GEN-LAST:event_BrowseButtonActionPerformed

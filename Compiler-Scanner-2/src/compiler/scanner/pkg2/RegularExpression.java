@@ -60,7 +60,7 @@ public class RegularExpression {
             }
             else if(c == ' ')
             {
-                return false;
+                return true;
             }
         }
         return result;        
