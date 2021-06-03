@@ -16,8 +16,9 @@ public class DFA_Identifier {
     public void IdentifierDFA(String s) {
         RegularExpression reg = new RegularExpression();
         char state = 'A';
+        ScannerString sc =new ScannerString(s);
          ArrayList<Character> ch = new ArrayList<>();//Arraylist for add found Lexemes
-        for (char c:s.toCharArray()) {
+        for (char c:sc.toCharArray()) {
             switch (state) {
                 case ('A'): {
                     if (reg.isAlaphabet(c)) {
@@ -82,7 +83,8 @@ public class DFA_Identifier {
     public void DFA_Constant(String s) {
         RegularExpression reg = new RegularExpression();
         char state = '1';
-        for (char c:s.toCharArray()) {
+        ScannerString sc =new ScannerString(s);
+        for (char c:sc.toCharArray()) {
             switch (state) {
                 case ('1'): {
                     if (reg.isNumber(c)) {

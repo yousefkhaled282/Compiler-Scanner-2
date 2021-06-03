@@ -4,10 +4,11 @@ package compiler.scanner.pkg2;
 public class DFA_For_Symbols {
     public static int noLex=0;
     public  String SymbolDFA(String s,int NoLine) {
-            Lexeme L = new Lexeme();
-String SymbolOutput="";
+        Lexeme L = new Lexeme();
+        ScannerString sc =new ScannerString(s);
+        String SymbolOutput="";
         char State = 'A';
-        for (char c : s.toCharArray()) {
+        for (char c : sc.toCharArray()) {
             // System.out.println("char "+c);
 
             switch (State) {

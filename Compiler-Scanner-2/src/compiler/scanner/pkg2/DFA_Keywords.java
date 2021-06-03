@@ -17,7 +17,8 @@ public class DFA_Keywords {
         String State = "A";
         Lexeme L = new Lexeme();
         String KeyWordOutput="";
-        for (char c : s.toCharArray()) {
+        ScannerString sc =new ScannerString(s);
+        for (char c : sc.toCharArray()) {
             switch (State) {
 ///////////////////------=---------------cOLUM1---------------------------------------------------------------------------------------------------////                
                 case ("A"): {

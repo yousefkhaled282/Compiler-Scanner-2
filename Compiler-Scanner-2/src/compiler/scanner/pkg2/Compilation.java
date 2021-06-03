@@ -25,8 +25,10 @@ public class Compilation {
 
     public String compile_output(String s1, int x) {
         String OutputLine = "";
+        ScannerString sc =new ScannerString(s1);
+        ScannerString sc1 =new ScannerString("/-");
         //check if StringLine is comment
-        if (s1.startsWith("/-")) {
+        if (sc.startsWith(sc1)) {
             OutputLine += x + "\t" + "/-" + "\t" + "Comment" + "\t" + 1 + "\t" + "Matched" + "\n";
             return OutputLine;
         } else {
@@ -132,8 +134,10 @@ public class Compilation {
         ArrayList<Integer> index = new ArrayList<>();//Arraylist for add index of Symbols
         Lexeme L = new Lexeme();//Class Lexeme
         RegularExpression RE = new RegularExpression();
+        ScannerString sc =new ScannerString(s1);
+        ScannerString sc1 =new ScannerString("/-");
         int error = 0;
-        if (s1.startsWith("/-")) {
+        if (sc.startsWith(sc1)) {
             return 0;
         } else {
             int noLex = 1;
