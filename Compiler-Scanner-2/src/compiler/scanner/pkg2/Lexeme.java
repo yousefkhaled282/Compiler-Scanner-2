@@ -25,7 +25,7 @@ class Lexeme {
             "/-","@",";"};   
     */
     
-    public static boolean isSymbol(char token)
+    public  boolean isSymbol(char token)
     {
         boolean result = false;
          for(int i=0;i<Symbols.length;i++)
@@ -38,7 +38,7 @@ class Lexeme {
         }
         return result;
     }
-    public static boolean isSymboltry(String token)
+    public  boolean isSymboltry(String token)
     {
         boolean result = false;
          for(int i=0;i<Symbols.length;i++)
@@ -52,7 +52,7 @@ class Lexeme {
         return result;
     }
     
-    public static boolean isSymbolrep(String token)
+    public  boolean isSymbolrep(String token)
     {
         boolean result = false;
          for(int i=0;i<Symbolsrep.length;i++)
@@ -64,7 +64,7 @@ class Lexeme {
         }
         return result;
     }
-    public static boolean isNumber(char token)
+    public  boolean isNumber(char token)
      {  
          boolean result = false;
          for(int i=0;i<10;i++)
@@ -77,7 +77,7 @@ class Lexeme {
         return result;
     }
     
-     public static boolean isConstant(String Token)
+     public  boolean isConstant(String Token)
     {
         boolean result = false;
         for(int i=0;i<Token.length();i++)
@@ -97,7 +97,7 @@ class Lexeme {
         return result;
     }
     
-    public static final String[] Lex={"Divisio","InferedFrom",
+    public  final String[] Lex={"Divisio","InferedFrom",
             "WhetherDo-Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","NoneValue",
             "TerminateThisNow","RingWhen","BackedValue","STT","Check–CaseOf",
             "Beginning","End","+","-","*",
@@ -107,7 +107,7 @@ class Lexeme {
             "'","","Using","/#","#/",
             "/-","@",";"};
     
-    public static int Get(String Lexe){
+    public  int Get(String Lexe){
        for(int i=0;i<Lex.length;i++){
          if(Lexe.equals(Lex[i])){
              return i;
@@ -115,7 +115,7 @@ class Lexeme {
        }
        return -1;
     }
-     public static boolean isLex(String token){
+     public  boolean isLex(String token){
        for(int i=0;i<Lex.length;i++){
            if (Lex[i].equals(token))
                    return true;

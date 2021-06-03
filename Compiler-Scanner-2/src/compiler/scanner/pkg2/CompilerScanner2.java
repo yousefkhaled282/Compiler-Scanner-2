@@ -16,14 +16,17 @@ public class CompilerScanner2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-//        DFA_Keywords dfk=new DFA_Keywords();
-//        DFA_For_Symbols dfs= new DFA_For_Symbols();
-//        DFA_Identifier dfi=new DFA_Identifier();
-//        String s ="()";
-//        System.out.println(dfk.keywordDFa(s,1));
-////        dfi.DFA_Constant(s);
-////        dfi.IdentifierDFA(s);
-//        System.out.println(dfs.SymbolDFA(s,1));
+        DFA_Keywords dfk=new DFA_Keywords();
+        DFA_For_Symbols dfs= new DFA_For_Symbols();
+        DFA_Identifier dfi=new DFA_Identifier();
+        Compilation c=new Compilation();
+       
+        String s ="reg3=reg3-1;}";
+        //c.compile(s);
+       // System.out.println(dfk.keywordDFa(s,1));
+//        dfi.DFA_Constant(s);
+//        dfi.IdentifierDFA(s);
+      //  System.out.println(dfs.SymbolDFA(s,1));
         
        ScannerGUI sc=new ScannerGUI();
        sc.setVisible(true);

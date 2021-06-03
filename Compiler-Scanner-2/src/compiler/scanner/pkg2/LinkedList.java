@@ -10,87 +10,99 @@ package compiler.scanner.pkg2;
  * @author Dell
  */
 public class LinkedList<T> {
+
     private Node<T> head;
     private int size;
-    public LinkedList(){
+
+    public LinkedList() {
         size = 0;
     }
-    
-    public void insert(T value){
+
+    public void insert(T value) {
         Node<T> newNode = new Node(value);
         newNode.nextNode = null;
-        if(head == null){
+        if (head == null) {
             head = newNode;
-        }else{
+        } else {
             Node<T> temp = head;
-            while(temp.nextNode != null){
+            while (temp.nextNode != null) {
                 temp = temp.nextNode;
             }
             temp.nextNode = newNode;
         }
         size++;
     }
-    
-    public T get(T value){
-        if(head.value.equals(value)){
+
+    public T get(T value) {
+        if (head.value.equals(value)) {
             return head.value;
-        }else{
+        } else {
             Node<T> temp = head;
-            while(temp.nextNode != null){
-                if(temp.value.equals(value)){
+            while (temp.nextNode != null) {
+                if (temp.value.equals(value)) {
                     return temp.value;
                 }
-                  temp = temp.nextNode;
+                temp = temp.nextNode;
             }
         }
         return null;
     }
-    public T get(int index){
-           if(index == 0)
-return head.value;
-Node<T> temp = head;
-for(int i = 0; i < index && i < size; i++){
-if(temp.nextNode != null){
-temp = temp.nextNode;
-}
-}
-return temp.value;
+
+    public T get(int index) {
+        if (index == 0) {
+            return head.value;
+        }
+        Node<T> temp = head;
+        for (int i = 0; i < index && i < size; i++) {
+            if (temp.nextNode != null) {
+                temp = temp.nextNode;
+            }
+        }
+        return temp.value;
     }
-    
-    
-    
-    
-    
-    
-    
-    public void remove(T value){
+
+    public void remove(T value) {
         Node<T> temp = head;
         Node<T> prev = null;
-        if(temp != null && temp.value.equals(value)){
+        if (temp != null && temp.value.equals(value)) {
             head = temp.nextNode;
         }
-        
-        while(temp != null && !temp.value.equals(value)){
+
+        while (temp != null && !temp.value.equals(value)) {
             prev = temp;
             temp = temp.nextNode;
         }
-        
-        if(temp != null){
+
+        if (temp != null) {
             prev.nextNode = temp.nextNode;
         }
     }
 
+    private class Node<T> {
 
-
-    private class Node<T>{
         private T value;
         private Node<T> nextNode;
-        private Node(T value){
+
+        private Node(T value) {
             this.value = value;
         }
     }
-    public int getSize(){
+
+    public int getSize() {
         return size;
     }
-    
+
+    public void replace(int index, T value) {
+        if (index > size ) {
+            return;
+        }
+        if (index == 0) {
+            head.value = value;
+        }
+        Node<T> temp = head.nextNode;
+        for (int i = 0; i < index&&temp.nextNode!=null; i++) {
+            temp = temp.nextNode;
+        }
+        temp.value = value;
+    }
 }

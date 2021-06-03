@@ -286,8 +286,8 @@ public class ScannerGUI extends javax.swing.JFrame {
                 Compilation scaner2 = new Compilation();
                 for (int i = 0; i < MapKeys.getSize(); i++) {
                     RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
-                    error += scaner2.compile_error((String) map.get(i));
-                    noLex = 1;
+                    error +=compile_error((String) map.get(i));
+                                        noLex = 1;
 
                 }
                 //display scanner output in table
