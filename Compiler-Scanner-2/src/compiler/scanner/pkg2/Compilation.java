@@ -5,6 +5,10 @@
  */
 package compiler.scanner.pkg2;
 
+import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
@@ -27,9 +31,38 @@ public class Compilation {
         String OutputLine = "";
         ScannerString sc =new ScannerString(s1);
         ScannerString sc1 =new ScannerString("/-");
+      ScannerString useing =new ScannerString("Using");
+
         //check if StringLine is comment
         if (sc.startsWith(sc1)) {
             OutputLine += x + "\t" + "/-" + "\t" + "Comment" + "\t" + 1 + "\t" + "Matched" + "\n";
+            return OutputLine;
+        }else if (sc.startsWith(useing)) {
+             Dictionary map = new Dictionary<Integer, String>();
+            OutputLine += x + "\t" + "Using" + "\t" + "Read File" + "\t" + 1 + "\t" + "Matched" + "\n";
+             String[] lines = s1.split(" ");  
+            System.out.println(lines[1]);
+            
+           String contents="";
+                try {
+                    //lines[1] file name like this Using D:\m.txt
+                    contents = new String(Files.readAllBytes(Paths.get(lines[1])));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //read file line by Line and add in map
+                String[] Usinglines = contents.split("\n");
+                int num = 0;
+                for (String line : Usinglines) {
+                    map.add(num++, line);
+                }
+                LinkedList<Integer> MapKeys = map.getKeys();
+                //scan Line in map
+                Compilation scaner2 = new Compilation();
+                for (int i = 0; i < MapKeys.getSize(); i++) {
+                    OutputLine += scaner2.compile_output((String) map.get(i), i + 1);
+                }
+            
             return OutputLine;
         } else {
             int noLex = 1;
@@ -55,7 +88,7 @@ public class Compilation {
 
             String lex = sb.toString();
             if (L.isLex(lex) == false) {
-                OutputLine += x + "\t" + lex + "\t" + "Not Exits" + "\t" + noLex + "\t" + "Not Matched" + "\n";
+               // OutputLine += x + "\t" + lex + "\t" + "Not Exits" + "\t" + noLex + "\t" + "Not Matched" + "\n";
             }
             ///For Loop For detect symbol and its index 
             for (int i = 0; i < c.getSize(); i++) {
@@ -128,89 +161,118 @@ public class Compilation {
     }
 
     public static int compile_error(String s1) {
-        ArrayList<Character> lexeme = new ArrayList<>();//Arraylist for add found Lexemes
-        ArrayList<Character> Identifier = new ArrayList<>();//Arraylist for add found Identifier
-        ArrayList<Character> symbol = new ArrayList<>(); //Arraylist for add found Symbols
-        ArrayList<Character> c = new ArrayList<>();//First Char list take the string input from String s1
-        ArrayList<Character> c1 = new ArrayList<>();//SEcond Char list take sting after add @ in index 0 Take inputs from s
-        ArrayList<Integer> index = new ArrayList<>();//Arraylist for add index of Symbols
-        Lexeme L = new Lexeme();//Class Lexeme
-        RegularExpression RE = new RegularExpression();
+
+    LinkedList<Character> lexeme = new LinkedList<>();
+    LinkedList<Character> Identifier = new LinkedList<>();
+    LinkedList<Character> symbol = new LinkedList<>();
+    LinkedList<Character> c = new LinkedList<>();
+    LinkedList<Character> c1 = new LinkedList<>();
+    LinkedList<Integer> index = new LinkedList<>();//Arraylist for add index of Symbols
+    Lexeme L = new Lexeme();//Class Lexeme
+    RegularExpression RE = new RegularExpression();
         ScannerString sc =new ScannerString(s1);
         ScannerString sc1 =new ScannerString("/-");
-        int error = 0;
+      ScannerString useing =new ScannerString("Using");
+   int error=0;
+        //check if StringLine is comment
         if (sc.startsWith(sc1)) {
-            return 0;
+        }else if (sc.startsWith(useing)) {
+             Dictionary map = new Dictionary<Integer, String>();
+             String[] lines = s1.split(" ");  
+            System.out.println(lines[1]);           
+           String contents="";
+                try {
+                    contents = new String(Files.readAllBytes(Paths.get(lines[1])));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                //read file line by Line and add in map
+                String[] Usinglines = contents.split("\n");
+                int num = 0;
+                for (String line : Usinglines) {
+                    map.add(num++, line);
+                }
+                LinkedList<Integer> MapKeys = map.getKeys();
+                //scan Line in map
+                Compilation scaner2 = new Compilation();
+                for (int i = 0; i < MapKeys.getSize(); i++) {
+                    error += compile_error((String) map.get(i));
+                }
+            
+            return error;
         } else {
             int noLex = 1;
             for (char ch : s1.toCharArray()) {
-                c.add(ch);
+                c.insert(ch);
             }
             ///For Loop For detect Lexeme
-            for (int i = 0; i < c.size(); i++) {
+            for (int i = 0; i < c.getSize(); i++) {
                 if ('@' == c.get(i)) {
                     for (int j = 0; j < i; j++) {
                         char var = c.get(j);
-                        lexeme.add(var);
+                        lexeme.insert(var);
                     }
                 }
             }
             //Bulid Lexeme and search if its found or not
             //Lexeme ---> Token
             StringBuilder sb = new StringBuilder();
-            for (Character ch : lexeme) {
-                sb.append(ch);
+            for(int i=0;i<lexeme.getSize();i++){
+                            sb.append(lexeme.get(i));
+
             }
+
             String lex = sb.toString();
             if (L.isLex(lex) == false) {error++;
             }
             ///For Loop For detect symbol and its index 
-            for (int i = 0; i < c.size(); i++) {
+            for (int i = 0; i < c.getSize(); i++) {
                 if (L.isSymbol(c.get(i))) {
-                    index.add(i);
+                    index.insert(i);
                     char var = c.get(i);
-                    symbol.add(var);
+                    symbol.insert(var);
                 }
             }
             //For Loop Detect Identifier
-            if (lexeme.isEmpty()) {//it will enter here if lexeme is not found
+            if (lexeme.getSize()==0) {//it will enter here if lexeme is not found
                 //For Loop For Inc 1  inside arraylist Index
-                for (int i = 0; i < index.size(); i++) {
+                for (int i = 0; i < index.getSize(); i++) {
                     int oldValue = index.get(i);
                     int newValue = oldValue + 1;
-                    index.set(i, newValue);
+                    index.replace(i, newValue);
                 }
-                index.add(0, 0);
+                //add 0 in Index 0
+                index.replace(0, 0);
                 String s = s1;
                 for (char ch : s.toCharArray()) {
-                    c1.add(ch);
+                    c1.insert(ch);
                 }
                 //For Loop For convert all Symbol to /
-                for (int i = 0; i < index.size() - 1; i++) {
+                for (int i = 0; i < index.getSize() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c1.get(j);
                         if (!(j == index.get(i + 1))) {
-                            Identifier.add(var);
+                            Identifier.insert(var);
                         }
                     }
-                    Identifier.add('/');
+                    Identifier.insert('/');
                 }
             } else {//it will enter here if lexeme is found
                 //For Loop For convert all Symbol to /    
-                for (int i = 0; i < index.size() - 1; i++) {
+                for (int i = 0; i < index.getSize() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c.get(j);
                         if (!(j == index.get(i + 1))) {
-                            Identifier.add(var);
+                            Identifier.insert(var);
                         }
                     }
-                    Identifier.add('/');
+                    Identifier.insert('/');
                 }
             }
             //Build identifier to string
             StringBuilder S_indentifier = new StringBuilder();
-            for (Character ch : Identifier) {
-                S_indentifier.append(ch);
+            for (int i=0;i<Identifier.getSize();i++) {
+                S_indentifier.append(Identifier.get(i));
             }
             //Split Each identifiers and constants and put it into an String array 
             String iden = S_indentifier.toString();
@@ -219,9 +281,11 @@ public class Compilation {
             for (int i = 0; i < arr.length; i++) {
                 if (RE.isIdentefier(arr[i])) {
                 } else if (L.isConstant(arr[i])) {
-                }else{error++;}
+                }
+                else{error++;}
             }
-            return error;
         }
+                    return error;
+
     }
 }

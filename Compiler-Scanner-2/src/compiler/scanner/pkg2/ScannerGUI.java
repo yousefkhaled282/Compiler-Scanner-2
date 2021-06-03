@@ -267,8 +267,10 @@ public class ScannerGUI extends javax.swing.JFrame {
             Dictionary map = new Dictionary<Integer, String>();
             if (response == JFileChooser.APPROVE_OPTION) {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
+                System.out.println(path);
                 String contents = null; 
                 try {
+                    //Using D:\m.txt
                     contents = new String(Files.readAllBytes(Paths.get(path)));
                 } catch (IOException e) {
                     e.printStackTrace();
