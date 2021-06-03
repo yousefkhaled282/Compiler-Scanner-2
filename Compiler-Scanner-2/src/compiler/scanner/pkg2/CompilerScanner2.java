@@ -19,10 +19,10 @@ public class CompilerScanner2 {
 //        DFA_Keywords dfk=new DFA_Keywords();
 //        DFA_For_Symbols dfs= new DFA_For_Symbols();
 //        DFA_Identifier dfi=new DFA_Identifier();
-//        String s ="RingWhen@Beginningdecreaseif(num=5) {";
+//        String s ="()";
 //        System.out.println(dfk.keywordDFa(s,1));
-//        dfi.DFA_Constant(s);
-//        dfi.IdentifierDFA(s);
+////        dfi.DFA_Constant(s);
+////        dfi.IdentifierDFA(s);
 //        System.out.println(dfs.SymbolDFA(s,1));
         
        ScannerGUI sc=new ScannerGUI();

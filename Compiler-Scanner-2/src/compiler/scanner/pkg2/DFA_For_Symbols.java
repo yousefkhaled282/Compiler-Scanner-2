@@ -3,7 +3,7 @@ package compiler.scanner.pkg2;
 
 public class DFA_For_Symbols {
     public static int noLex=0;
-    public static String SymbolDFA(String s,int NoLine) {
+    public  String SymbolDFA(String s,int NoLine) {
             Lexeme L = new Lexeme();
 String SymbolOutput="";
         char State = 'A';
@@ -221,6 +221,7 @@ String SymbolOutput="";
                 }
                 break;
             }
+            
             //------------------------------------------- Output-------------------------------------/////  
             //System.out.println("State  " + State);
             
@@ -253,7 +254,6 @@ String SymbolOutput="";
             } else if (State == 'I') {
                 noLex++;
                 SymbolOutput+=NoLine+"\t"+"("+"\t"+L.getToken("(")+"\t"+noLex+"\t"+"Matched"+"\n";
-
             }else if (State == 'J') {   
                 noLex++;
 
@@ -314,6 +314,7 @@ String SymbolOutput="";
                 SymbolOutput+=NoLine+"\t"+"~"+"\t"+L.getToken("~")+"\t"+noLex+"\t"+"Matched"+"\n";
 
             } 
+
 //            else {
 //                System.out.println("FALSE");
 //            }
@@ -322,6 +323,7 @@ String SymbolOutput="";
 //--------------------------------------------REPEATER------------------------------------------------------------------------//            
             if (State == 'A') {
                 switch (State) {
+                    
                     case ('A'): {
                         {
                             if (c == '!') {

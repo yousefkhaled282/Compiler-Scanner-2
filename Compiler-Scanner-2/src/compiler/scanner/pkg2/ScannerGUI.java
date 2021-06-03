@@ -5,14 +5,8 @@
  */
 package compiler.scanner.pkg2;
 
-import static compiler.scanner.pkg2.Compilation.compile_output;
-import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
-
 import static compiler.scanner.pkg2.Compilation.compile_error;
-import static compiler.scanner.pkg2.DFA_For_Symbols.SymbolDFA;
-import static compiler.scanner.pkg2.DFA_Keywords.keywordDFa;
-import static compiler.scanner.pkg2.Scanner.Result;
-import static compiler.scanner.pkg2.Scanner.error;
+import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.TextArea;
@@ -273,31 +267,34 @@ public class ScannerGUI extends javax.swing.JFrame {
             Dictionary map = new Dictionary<Integer, String>();
             if (response == JFileChooser.APPROVE_OPTION) {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
-                String contents = null;
+                String contents = null; 
                 try {
                     contents = new String(Files.readAllBytes(Paths.get(path)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
+                //read file line by Line and add in map
                 String[] lines = contents.split("\n");
                 int num = 0;
                 for (String line : lines) {
                     map.add(num++, line);
                 }
                 error = 0;
-                String out = "";
+                String RowOutput = "";
                 LinkedList<Integer> MapKeys = map.getKeys();
+                //scan Line in map
+                Compilation scaner2 = new Compilation();
                 for (int i = 0; i < MapKeys.getSize(); i++) {
-                    out += compile_output((String) map.get(i), i + 1);
-                    error += compile_error((String) map.get(i));
+                    RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
+                    error += scaner2.compile_error((String) map.get(i));
                     noLex = 1;
 
                 }
+                //display scanner output in table
                 DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
-                String[] Result = out.split("\n");
+                String[] Result = RowOutput.split("\n");
                 for (String line : Result) {
                     String[] currencies = line.split("\t");
-                    // System.out.println(currencies.length);
                     Object[] row = new Object[5];
                     for (int i = 0; i < currencies.length; i++) {
                         row[i] = currencies[i];
@@ -305,9 +302,8 @@ public class ScannerGUI extends javax.swing.JFrame {
                     model.addRow(row);
                 }
                 System.out.println(error);
-                        String s=Integer.toString(error);
-        //System.out.print(out);
-        errorLabel.setText("No of errors : "+s);
+                String s = Integer.toString(error);
+                errorLabel.setText("No of errors : " + s);
             }
         }
     }//GEN-LAST:event_BrowseButtonActionPerformed
@@ -317,36 +313,33 @@ public class ScannerGUI extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
         model.setRowCount(0);
         noLex = 1;
-
         Dictionary map = new Dictionary<Integer, String>();
         scan = TextArea.getText();
-
+       //read line bylinefrpm textArea and add in map
         if (scan != null) {
             String[] lines = scan.split("\n");
             int num = 0;
             for (String line : lines) {
                 if (line != null) {
                     map.add(num++, line);
-
                 }
-
             }
         }
-        String out = "";
+        String RowOutput = "";
+        Compilation scaner2 = new Compilation();
         error = 0;
-
+        //scan Lines in map
         LinkedList<Integer> MapKeys = map.getKeys();
         for (int i = 0; i < MapKeys.getSize(); i++) {
-            out += compile_output((String) map.get(i), i + 1);
+            RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
             //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
             error += compile_error((String) map.get(i));
             noLex = 1;
         }
-        System.out.print(error);
-        String s=Integer.toString(error);
-        //System.out.print(out);
-        errorLabel.setText("No of errors : "+s);
-        String[] lines = out.split("\n");
+        String s = Integer.toString(error); 
+        //display scanner output in table
+        errorLabel.setText("No of errors : " + s);
+        String[] lines = RowOutput.split("\n");
         for (String line : lines) {
             String[] currencies = line.split("\t");
             // System.out.println(currencies.length);

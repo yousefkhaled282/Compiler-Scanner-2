@@ -13,7 +13,7 @@ import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
  */
 public class DFA_Keywords {
 
-    public static String keywordDFa(String s,int NoLine) {
+    public  String keywordDFa(String s,int NoLine) {
         String State = "A";
         Lexeme L = new Lexeme();
         String KeyWordOutput="";
@@ -1317,7 +1317,8 @@ public class DFA_Keywords {
                      KeyWordOutput+=NoLine+"\t"+"WhetherDo-Else"+"\t"+L.getToken("WhetherDo-Else")+"\t"+noLex+"\t"+"Matched"+"\n";
                     //System.out.println(L.getToken("WhetherDo-Else"));
 
-                } 
+                }
+              
 
             
             if (State == "0") {
