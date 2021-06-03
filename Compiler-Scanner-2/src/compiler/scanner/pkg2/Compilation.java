@@ -21,6 +21,8 @@ public class Compilation {
     LinkedList<Character> symbol = new LinkedList<>();
     LinkedList<Character> c = new LinkedList<>();
     LinkedList<Character> c1 = new LinkedList<>();
+        LinkedList<ScannerString> ReadUsing = new LinkedList<>();
+
     LinkedList<Integer> index = new LinkedList<>();//Arraylist for add index of Symbols
     Lexeme L = new Lexeme();//Class Lexeme
     RegularExpression RE = new RegularExpression();
@@ -40,13 +42,14 @@ public class Compilation {
         }else if (sc.startsWith(useing)) {
              Dictionary map = new Dictionary<Integer, String>();
             OutputLine += x + "\t" + "Using" + "\t" + "Read File" + "\t" + 1 + "\t" + "Matched" + "\n";
-             String[] lines = s1.split(" ");  
-            System.out.println(lines[1]);
+             ReadUsing= sc.split(new ScannerString(" "));  
+            System.out.println(ReadUsing.get(1).getString());
             
            String contents="";
                 try {
-                    //lines[1] file name like this Using D:\m.txt
-                    contents = new String(Files.readAllBytes(Paths.get(lines[1])));
+                    //lines[1] file name like this Using D:\n.txtUsing D:\n.txt
+                    String paths=ReadUsing.get(1).getString();
+                    contents = new String(Files.readAllBytes(Paths.get(paths)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -172,17 +175,22 @@ public class Compilation {
     RegularExpression RE = new RegularExpression();
         ScannerString sc =new ScannerString(s1);
         ScannerString sc1 =new ScannerString("/-");
+                LinkedList<ScannerString> ReadUsing = new LinkedList<>();
+
       ScannerString useing =new ScannerString("Using");
    int error=0;
         //check if StringLine is comment
         if (sc.startsWith(sc1)) {
         }else if (sc.startsWith(useing)) {
              Dictionary map = new Dictionary<Integer, String>();
-             String[] lines = s1.split(" ");  
-            System.out.println(lines[1]);           
+  ReadUsing= sc.split(new ScannerString(" "));  
+            System.out.println(ReadUsing.get(1).getString());
+            
            String contents="";
                 try {
-                    contents = new String(Files.readAllBytes(Paths.get(lines[1])));
+                    //lines[1] file name like this Using D:\n.txtUsing D:\n.txt
+                    String paths=ReadUsing.get(1).getString();
+                    contents = new String(Files.readAllBytes(Paths.get(paths)));
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
