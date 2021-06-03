@@ -21,8 +21,8 @@ public class CompilerScanner2 {
         DFA_Identifier dfi=new DFA_Identifier();
         Compilation c=new Compilation();
        
-        String s ="reg3=reg3-1;}";
-        //c.compile(s);
+        //String s ="reg3=reg3-1;}";
+       // System.out.println(c.compile_output(s,0));
        // System.out.println(dfk.keywordDFa(s,1));
 //        dfi.DFA_Constant(s);
 //        dfi.IdentifierDFA(s);
