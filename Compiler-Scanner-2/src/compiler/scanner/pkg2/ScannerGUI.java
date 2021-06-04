@@ -41,8 +41,10 @@ import javax.swing.text.BadLocationException;
  * @author lenovo
  */
 public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
-    
-    private static enum Mode{INSERT, COMPLETION}
+
+    private static enum Mode {
+        INSERT, COMPLETION
+    }
     private Mode mode = Mode.INSERT;
     private final LinkedList<ScannerString> words = new LinkedList<>();
     private static final String COMMIT_ACTION = "commit";
@@ -56,9 +58,8 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
     public int end;
     public int error;
     LinkedList<ScannerString> lines = new LinkedList<>();
-    LinkedList<ScannerString> Result = new LinkedList<>();
+    LinkedList<ScannerString> Outlines = new LinkedList<>();
     LinkedList<ScannerString> currencies = new LinkedList<>();
-
 
     public ScannerGUI() {
         initComponents();
@@ -88,15 +89,14 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
         words.insert(new ScannerString("Using"));
         jTextArea1.getDocument().addDocumentListener(this);
 
-
     }
-    
-        @Override
+
+    @Override
     public void insertUpdate(DocumentEvent ev) {
         if (ev.getLength() != 1) {
             return;
         }
-        
+
         int pos = ev.getOffset();
         ScannerString content = null;
         try {
@@ -104,38 +104,39 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
         } catch (BadLocationException e) {
             System.out.println(e.getMessage());
         }
-        
+
         // Find where the word starts
         int w;
         for (w = pos; w >= 0; w--) {
-            if (! Character.isLetter(content.charAt(w))) {
+            if (!Character.isLetter(content.charAt(w))) {
                 break;
             }
         }
-        
-        if(pos - w == 0)
+
+        if (pos - w == 0) {
             return;
-        
-       ScannerString prefix = content.substring(w + 1);
-       for(int i = 0; i < words.size(); i++){
-           if(words.get(i).startsWith(prefix)){
-               ScannerString completion = words.get(i).substring(pos - w);
-               SwingUtilities.invokeLater(new CompletionTask(completion.getString(), pos + 1));
-               break;
-           }else{
-               mode = Mode.INSERT;
-           }
-       }
+        }
+
+        ScannerString prefix = content.substring(w + 1);
+        for (int i = 0; i < words.size(); i++) {
+            if (words.get(i).startsWith(prefix)) {
+                ScannerString completion = words.get(i).substring(pos - w);
+                SwingUtilities.invokeLater(new CompletionTask(completion.getString(), pos + 1));
+                break;
+            } else {
+                mode = Mode.INSERT;
+            }
+        }
     }
 
     @Override
     public void removeUpdate(DocumentEvent arg0) {
-      
+
     }
 
     @Override
     public void changedUpdate(DocumentEvent arg0) {
-        
+
     }
 
     /**
@@ -284,7 +285,7 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
             if (response == JFileChooser.APPROVE_OPTION) {
                 path = fileChooser.getSelectedFile().getAbsolutePath();
                 System.out.println(path);
-                String contents = null; 
+                String contents = null;
                 try {
                     //Using D:\m.txt
                     contents = new String(Files.readAllBytes(Paths.get(path)));
@@ -292,10 +293,12 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
                     e.printStackTrace();
                 }
                 //read file line by Line and add in map
-                String[] lines = contents.split("\n");
+                ScannerString sc = new ScannerString(contents);
+                lines = sc.split(new ScannerString("\n"));
                 int num = 0;
-                for (String line : lines) {
-                    map.add(num++, line);
+                for (int i = 0; i < lines.size(); i++) {
+
+                    map.add(num++, lines.get(i).getString());
                 }
                 error = 0;
                 String RowOutput = "";
@@ -304,18 +307,22 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
                 Compilation scaner2 = new Compilation();
                 for (int i = 0; i < MapKeys.size(); i++) {
                     RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
-                    error +=compile_error((String) map.get(i));
-                                        noLex = 1;
+                    error += compile_error((String) map.get(i));
+                    noLex = 1;
 
                 }
                 //display scanner output in table
                 DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
-                String[] Result = RowOutput.split("\n");
-                for (String line : Result) {
-                    String[] currencies = line.split("\t");
+                ScannerString Ro = new ScannerString(RowOutput);
+                Outlines = Ro.split(new ScannerString("\n"));
+                //String[] lines = RowOutput.split("\n");
+                for (int i = 0; i < Outlines.size(); i++) {
+                    ScannerString ScanOutput = new ScannerString(Outlines.get(i).getString());
+                    currencies = ScanOutput.split(new ScannerString("\t"));
+                    //System.out.println(currencies.get(2).getString());
                     Object[] row = new Object[5];
-                    for (int i = 0; i < currencies.length; i++) {
-                        row[i] = currencies[i];
+                    for (int c = 0; c < currencies.size(); c++) {
+                        row[c] = currencies.get(c).getString();
                     }
                     model.addRow(row);
                 }
@@ -328,44 +335,51 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
 
     private void ScanButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ScanButtonActionPerformed
         //Input Scanner
+        //Input Scanner
         DefaultTableModel model = (DefaultTableModel) OutputTable.getModel();
         model.setRowCount(0);
         noLex = 1;
         Dictionary map = new Dictionary<Integer, String>();
         scan = jTextArea1.getText();
-       //read line bylinefrpm textArea and add in map
+        ScannerString sc = new ScannerString(scan);
+        //read line bylinefrpm textArea and add in map
         if (scan != null) {
-            String[] lines = scan.split("\n");
+            lines = sc.split(new ScannerString("\n"));
             int num = 0;
-            for (String line : lines) {
-                if (line != null) {
-                    map.add(num++, line);
+            for (int i = 0; i < lines.size(); i++) {
+                if (lines.get(i).getString() != null) {
+
+                    map.add(num++, lines.get(i).getString());
                 }
+
             }
-        }
-        String RowOutput = "";
-        Compilation scaner2 = new Compilation();
-        error = 0;
-        //scan Lines in map
-        LinkedList<Integer> MapKeys = map.getKeys();
-        for (int i = 0; i < MapKeys.size(); i++) {
-            RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
-            //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
-            error += compile_error((String) map.get(i));
-            noLex = 1;
-        }
-        String s = Integer.toString(error); 
-        //display scanner output in table
-        errorLabel.setText("No of errors : " + s);
-        String[] lines = RowOutput.split("\n");
-        for (String line : lines) {
-            String[] currencies = line.split("\t");
-            // System.out.println(currencies.length);
-            Object[] row = new Object[5];
-            for (int i = 0; i < currencies.length; i++) {
-                row[i] = currencies[i];
+
+            Compilation scaner2 = new Compilation();
+            error = 0;
+            //scan Lines in map
+            LinkedList<Integer> MapKeys = map.getKeys();
+            String RowOutput = "";
+            for (int i = 0; i < MapKeys.size(); i++) {
+                RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
+                error += compile_error((String) map.get(i));
+                noLex = 1;
             }
-            model.addRow(row);
+            String s = Integer.toString(error);
+            //display scanner output in table
+            errorLabel.setText("No of errors : " + s);
+            ScannerString Ro = new ScannerString(RowOutput);
+            Outlines = Ro.split(new ScannerString("\n"));
+            //String[] lines = RowOutput.split("\n");
+            for (int i = 0; i < Outlines.size(); i++) {
+                ScannerString ScanOutput = new ScannerString(Outlines.get(i).getString());
+                currencies = ScanOutput.split(new ScannerString("\t"));
+                //System.out.println(currencies.get(2).getString());
+                Object[] row = new Object[5];
+                for (int c = 0; c < currencies.size(); c++) {
+                    row[c] = currencies.get(c).getString();
+                }
+                model.addRow(row);
+            }
         }
 
     }//GEN-LAST:event_ScanButtonActionPerformed
@@ -444,17 +458,17 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
             }
         });
     }
-    
-    private class CompletionTask implements Runnable{
+
+    private class CompletionTask implements Runnable {
 
         String completion;
         int position;
-        
+
         CompletionTask(String completion, int position) {
             this.completion = completion;
             this.position = position;
         }
-        
+
         @Override
         public void run() {
             jTextArea1.insert(completion, position);
@@ -463,7 +477,9 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
             mode = Mode.COMPLETION;
         }
     }
-        private class CommitAction extends AbstractAction {
+
+    private class CommitAction extends AbstractAction {
+
         @Override
         public void actionPerformed(ActionEvent ev) {
             if (mode == Mode.COMPLETION) {
@@ -474,7 +490,7 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
                 jTextArea1.replaceSelection("\n");
             }
         }
-        
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
