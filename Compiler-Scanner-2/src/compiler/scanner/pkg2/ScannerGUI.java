@@ -41,6 +41,10 @@ public class ScannerGUI extends javax.swing.JFrame {
     public int start;
     public int end;
     public int error;
+    LinkedList<ScannerString> lines = new LinkedList<>();
+    LinkedList<ScannerString> Result = new LinkedList<>();
+        LinkedList<ScannerString> currencies = new LinkedList<>();
+
 
     public ScannerGUI() {
         initComponents();
