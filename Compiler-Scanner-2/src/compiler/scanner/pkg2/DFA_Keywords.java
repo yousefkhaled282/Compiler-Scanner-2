@@ -1315,9 +1315,9 @@ public class DFA_Keywords {
    
 
                 }else if (State == "DT") {
-                     KeyWordOutput+=NoLine+"\t"+"Else"+"\t"+L.getToken("Else")+"\t"+noLex+"\t"+"Matched"+"\n";
-                    
-                }
+                KeyWordOutput += NoLine + "\t" + "Else" + "\t" + L.getToken("Else") + "\t" + noLex + "\t" + "Matched" + "\n";
+
+            }
               
 
             

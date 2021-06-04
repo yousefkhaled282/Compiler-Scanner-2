@@ -5,26 +5,18 @@
  */
 package compiler.scanner.pkg2;
 
-import static compiler.scanner.pkg2.Compilation.compile_error;
+import static compiler.scanner.pkg2.ScannerController.compile_error;
 import static compiler.scanner.pkg2.DFA_For_Symbols.noLex;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.TextArea;
-import java.awt.event.KeyEvent;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
-import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static java.util.regex.Pattern.compile;
 import javax.swing.JFileChooser;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
-import javax.swing.text.Utilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.ActionEvent;
@@ -33,7 +25,6 @@ import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
-import javax.swing.UIManager;
 import javax.swing.text.BadLocationException;
 
 /**
@@ -175,7 +166,7 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
             }
         });
 
-        ScanButton.setText("Scan");
+        ScanButton.setText("Compile");
         ScanButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ScanButtonActionPerformed(evt);
@@ -220,21 +211,21 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(16, 16, 16)
-                            .addComponent(jScrollPane4))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(568, 568, 568)
-                            .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane4))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(173, 173, 173)
+                                .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(568, 568, 568)
+                                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(493, 493, 493))
         );
         jPanel1Layout.setVerticalGroup(
@@ -247,11 +238,10 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -304,7 +294,7 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
                 String RowOutput = "";
                 LinkedList<Integer> MapKeys = map.getKeys();
                 //scan Line in map
-                Compilation scaner2 = new Compilation();
+                ScannerController scaner2 = new ScannerController();
                 for (int i = 0; i < MapKeys.size(); i++) {
                     RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
                     error += compile_error((String) map.get(i));
@@ -354,7 +344,7 @@ public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
 
             }
 
-            Compilation scaner2 = new Compilation();
+            ScannerController scaner2 = new ScannerController();
             error = 0;
             //scan Lines in map
             LinkedList<Integer> MapKeys = map.getKeys();

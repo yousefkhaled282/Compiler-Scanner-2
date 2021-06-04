@@ -75,19 +75,22 @@ public class LinkedList<T> {
     }
 
     public void remove(T value) {
-        Node<T> temp = head;
-        Node<T> prev = null;
-        if (temp != null && temp.value.equals(value)) {
-            head = temp.nextNode;
+        Node<T> currNode = head, prev = currNode;
+
+        if (currNode != null && currNode.value.equals(value)) {
+            head = currNode.nextNode;
+            size--;
+            return;
         }
 
-        while (temp != null && !temp.value.equals(value)) {
-            prev = temp;
-            temp = temp.nextNode;
+        while (currNode != null && currNode.value != value) {
+            prev = currNode;
+            currNode = currNode.nextNode;
         }
 
-        if (temp != null) {
-            prev.nextNode = temp.nextNode;
+        if (currNode != null) {
+            prev.nextNode = currNode.nextNode;
+            size--;
         }
     }
 

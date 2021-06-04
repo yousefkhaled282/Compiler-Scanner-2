@@ -1,3 +1,8 @@
-Using D:\n.txt
 /-This is main function 
-Ire@3num=5;
+Ire@num=5;
+/#Ire@sys=3;
+Ire@sss=3;#/
+WhetherDo@(num>couter){
+Ire@num=5;}
+Else@{
+SFBU@fnum=3;}
