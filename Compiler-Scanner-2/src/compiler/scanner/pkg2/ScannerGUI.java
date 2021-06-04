@@ -25,17 +25,31 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Document;
 import javax.swing.text.Element;
 import javax.swing.text.Utilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
+import javax.swing.InputMap;
+import javax.swing.KeyStroke;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.text.BadLocationException;
 
 /**
  *
  * @author lenovo
  */
-public class ScannerGUI extends javax.swing.JFrame {
+public class ScannerGUI extends javax.swing.JFrame implements DocumentListener {
+    
+    private static enum Mode{INSERT, COMPLETION}
+    private Mode mode = Mode.INSERT;
+    private final LinkedList<ScannerString> words = new LinkedList<>();
+    private static final String COMMIT_ACTION = "commit";
 
     public String scan;
     public String[] test = new String[5];
     public String path;
-    Set<String> s;
     public String dataGen;
     public String TextString;
     public int start;
@@ -43,49 +57,85 @@ public class ScannerGUI extends javax.swing.JFrame {
     public int error;
     LinkedList<ScannerString> lines = new LinkedList<>();
     LinkedList<ScannerString> Result = new LinkedList<>();
-        LinkedList<ScannerString> currencies = new LinkedList<>();
+    LinkedList<ScannerString> currencies = new LinkedList<>();
 
 
     public ScannerGUI() {
         initComponents();
-        s = new TreeSet<String>();
-        s.add("Divisio");
-        s.add("DnferedFrom");
-        s.add("WhetherDo-Else");
-        s.add("Ire");
-        s.add("Sire");
-        s.add("Clo");
-        s.add("SetOfClo");
-        s.add("FBU");
-        s.add("SFBU");
-        s.add("NoneValue");
-        s.add("TerminateThisNow");
-        s.add("RingWhen( ){\n\n\n\n\t}");
-        s.add("BackedValue");
-        s.add("STT");
-        s.add("Check–CaseOf");
-        s.add("End");
-        s.add("Beginning");
-        s.add("Using");
-        s.add("Divisio");
-        s.add("DnferedFrom");
-        s.add("WhetherDo-Else");
-        s.add("Ire");
-        s.add("Sire");
-        s.add("Clo");
-        s.add("SetOfClo");
-        s.add("FBU");
-        s.add("SFBU");
-        s.add("NoneValue");
-        s.add("TerminateThisNow");
-        s.add("RingWhen");
-        s.add("BackedValue");
-        s.add("STT");
-        s.add("Check–CaseOf");
-        s.add("End");
-        s.add("Beginning");
-        s.add("Using");
+        InputMap im = jTextArea1.getInputMap();
+        ActionMap am = jTextArea1.getActionMap();
+        im.put(KeyStroke.getKeyStroke("ENTER"), COMMIT_ACTION);
+        am.put(COMMIT_ACTION, new CommitAction());
+        words.insert(new ScannerString("Divisio"));
+        words.insert(new ScannerString("InferedFrom"));
+        words.insert(new ScannerString("WhetherDo"));
+        words.insert(new ScannerString("Else"));
+        words.insert(new ScannerString("Ire"));
+        words.insert(new ScannerString("Sire"));
+        words.insert(new ScannerString("Clo"));
+        words.insert(new ScannerString("SetOfClo"));
+        words.insert(new ScannerString("FBU"));
+        words.insert(new ScannerString("SFBU"));
+        words.insert(new ScannerString("NoneValue"));
+        words.insert(new ScannerString("TerminateThisNow"));
+        words.insert(new ScannerString("RingWhen(){}"));
+        words.insert(new ScannerString("BackedValue"));
+        words.insert(new ScannerString("STT"));
+        words.insert(new ScannerString("Check"));
+        words.insert(new ScannerString("CaseOf"));
+        words.insert(new ScannerString("End"));
+        words.insert(new ScannerString("Beginning"));
+        words.insert(new ScannerString("Using"));
+        jTextArea1.getDocument().addDocumentListener(this);
 
+
+    }
+    
+        @Override
+    public void insertUpdate(DocumentEvent ev) {
+        if (ev.getLength() != 1) {
+            return;
+        }
+        
+        int pos = ev.getOffset();
+        ScannerString content = null;
+        try {
+            content = new ScannerString(jTextArea1.getText(0, pos + 1));
+        } catch (BadLocationException e) {
+            System.out.println(e.getMessage());
+        }
+        
+        // Find where the word starts
+        int w;
+        for (w = pos; w >= 0; w--) {
+            if (! Character.isLetter(content.charAt(w))) {
+                break;
+            }
+        }
+        
+        if(pos - w == 0)
+            return;
+        
+       ScannerString prefix = content.substring(w + 1);
+       for(int i = 0; i < words.size(); i++){
+           if(words.get(i).startsWith(prefix)){
+               ScannerString completion = words.get(i).substring(pos - w);
+               SwingUtilities.invokeLater(new CompletionTask(completion.getString(), pos + 1));
+               break;
+           }else{
+               mode = Mode.INSERT;
+           }
+       }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent arg0) {
+      
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent arg0) {
+        
     }
 
     /**
@@ -100,25 +150,22 @@ public class ScannerGUI extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TextArea = new javax.swing.JTextArea();
+        jTextArea1 = new javax.swing.JTextArea();
         BrowseButton = new javax.swing.JButton();
         ScanButton = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         OutputTable = new javax.swing.JTable();
         CommentButton = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         errorLabel = new javax.swing.JLabel();
 
         jButton2.setText("jButton2");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        TextArea.setColumns(20);
-        TextArea.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        TextArea.setRows(5);
-        jScrollPane2.setViewportView(TextArea);
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
+        jTextArea1.setRows(5);
+        jScrollPane2.setViewportView(jTextArea1);
 
         BrowseButton.setText("Browse");
         BrowseButton.addActionListener(new java.awt.event.ActionListener() {
@@ -159,37 +206,12 @@ public class ScannerGUI extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setFont(new java.awt.Font("Consolas", 0, 18)); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField1KeyReleased(evt);
-            }
-        });
-
-        jButton1.setText("Genertate");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jLabel1.setText("Type Here For Autocomplete");
-
         errorLabel.setText("No. of Error");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 817, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,19 +225,15 @@ public class ScannerGUI extends javax.swing.JFrame {
                         .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane4))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(372, 372, 372)
-                                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(16, 16, 16)
+                            .addComponent(jScrollPane4))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGap(568, 568, 568)
+                            .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(0, 0, Short.MAX_VALUE))))
                 .addGap(493, 493, 493))
         );
         jPanel1Layout.setVerticalGroup(
@@ -223,19 +241,13 @@ public class ScannerGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(errorLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                .addGap(29, 29, 29)
+                .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BrowseButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(ScanButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(CommentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -290,7 +302,7 @@ public class ScannerGUI extends javax.swing.JFrame {
                 LinkedList<Integer> MapKeys = map.getKeys();
                 //scan Line in map
                 Compilation scaner2 = new Compilation();
-                for (int i = 0; i < MapKeys.getSize(); i++) {
+                for (int i = 0; i < MapKeys.size(); i++) {
                     RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
                     error +=compile_error((String) map.get(i));
                                         noLex = 1;
@@ -320,7 +332,7 @@ public class ScannerGUI extends javax.swing.JFrame {
         model.setRowCount(0);
         noLex = 1;
         Dictionary map = new Dictionary<Integer, String>();
-        scan = TextArea.getText();
+        scan = jTextArea1.getText();
        //read line bylinefrpm textArea and add in map
         if (scan != null) {
             String[] lines = scan.split("\n");
@@ -336,7 +348,7 @@ public class ScannerGUI extends javax.swing.JFrame {
         error = 0;
         //scan Lines in map
         LinkedList<Integer> MapKeys = map.getKeys();
-        for (int i = 0; i < MapKeys.getSize(); i++) {
+        for (int i = 0; i < MapKeys.size(); i++) {
             RowOutput += scaner2.compile_output((String) map.get(i), i + 1);
             //out+=keywordDFa((String) map.get(i),i+1)+SymbolDFA((String) map.get(i),i+1);  
             error += compile_error((String) map.get(i));
@@ -363,13 +375,13 @@ public class ScannerGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         int line = 0;
         try {
-            int offset = TextArea.getCaretPosition();
-            line = TextArea.getLineOfOffset(offset);
+            int offset = jTextArea1.getCaretPosition();
+            line = jTextArea1.getLineOfOffset(offset);
             System.out.println(line + 1);
         } catch (BadLocationException ex) {
             Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
-        Document doc = TextArea.getDocument();
+        Document doc = jTextArea1.getDocument();
         Element root = doc.getDefaultRootElement();
         Element contentEl = root.getElement(line);
 
@@ -397,46 +409,6 @@ public class ScannerGUI extends javax.swing.JFrame {
             Logger.getLogger(ScannerGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_CommentButtonActionPerformed
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-
-
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        TextArea.append(dataGen + '@');
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_BACK_SPACE || evt.getKeyCode() == KeyEvent.VK_DELETE) {
-
-        } else {
-            String to_check = jTextField1.getText();
-            int to_check_len = to_check.length();
-            for (String data : s) {
-                String check_from_data = "";
-                for (int i = 0; i < to_check_len; i++) {
-                    if (to_check_len <= data.length()) {
-                        check_from_data = check_from_data + data.charAt(i);
-                    }
-                }
-                //System.out.print(check_from_data);
-                if (check_from_data.equals(to_check)) {
-                    System.out.print("Found");
-
-                    jTextField1.setText(data);
-                    dataGen = data;
-                    jTextField1.setSelectionStart(to_check_len);
-                    jTextField1.setSelectionEnd(data.length());
-                    break;
-
-                }
-            }
-        }
-    }//GEN-LAST:event_jTextField1KeyReleased
 
     /**
      * @param args the command line arguments
@@ -472,20 +444,49 @@ public class ScannerGUI extends javax.swing.JFrame {
             }
         });
     }
+    
+    private class CompletionTask implements Runnable{
+
+        String completion;
+        int position;
+        
+        CompletionTask(String completion, int position) {
+            this.completion = completion;
+            this.position = position;
+        }
+        
+        @Override
+        public void run() {
+            jTextArea1.insert(completion, position);
+            jTextArea1.setCaretPosition(position + completion.length());
+            jTextArea1.moveCaretPosition(position);
+            mode = Mode.COMPLETION;
+        }
+    }
+        private class CommitAction extends AbstractAction {
+        @Override
+        public void actionPerformed(ActionEvent ev) {
+            if (mode == Mode.COMPLETION) {
+                int pos = jTextArea1.getSelectionEnd();
+                jTextArea1.setCaretPosition(pos);
+                mode = Mode.INSERT;
+            } else {
+                jTextArea1.replaceSelection("\n");
+            }
+        }
+        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BrowseButton;
     private javax.swing.JButton CommentButton;
     private javax.swing.JTable OutputTable;
     private javax.swing.JButton ScanButton;
-    private javax.swing.JTextArea TextArea;
     private javax.swing.JLabel errorLabel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables
 }

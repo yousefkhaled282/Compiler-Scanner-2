@@ -88,7 +88,7 @@ public class LinkedList<T> {
         }
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
@@ -96,7 +96,7 @@ public class LinkedList<T> {
         if (index > size ) {
             return;
         }
-        if (index == 0) {
+        if (index == 0 && head != null) {
             head.value = value;
         }
         Node<T> temp = head.nextNode;

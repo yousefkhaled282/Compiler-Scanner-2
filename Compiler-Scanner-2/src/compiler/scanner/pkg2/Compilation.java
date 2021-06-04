@@ -62,7 +62,7 @@ public class Compilation {
                 LinkedList<Integer> MapKeys = map.getKeys();
                 //scan Line in map
                 Compilation scaner2 = new Compilation();
-                for (int i = 0; i < MapKeys.getSize(); i++) {
+                for (int i = 0; i < MapKeys.size(); i++) {
                     OutputLine += scaner2.compile_output((String) map.get(i), i + 1);
                 }
             
@@ -73,7 +73,7 @@ public class Compilation {
                 c.insert(ch);
             }
             ///For Loop For detect Lexeme
-            for (int i = 0; i < c.getSize(); i++) {
+            for (int i = 0; i < c.size(); i++) {
                 if ('@' == c.get(i)) {
                     for (int j = 0; j < i; j++) {
                         char var = c.get(j);
@@ -84,7 +84,7 @@ public class Compilation {
             //Bulid Lexeme and search if its found or not
             //Lexeme ---> Token
             StringBuilder sb = new StringBuilder();
-            for(int i=0;i<lexeme.getSize();i++){
+            for(int i=0;i<lexeme.size();i++){
                             sb.append(lexeme.get(i));
 
             }
@@ -94,7 +94,7 @@ public class Compilation {
                // OutputLine += x + "\t" + lex + "\t" + "Not Exits" + "\t" + noLex + "\t" + "Not Matched" + "\n";
             }
             ///For Loop For detect symbol and its index 
-            for (int i = 0; i < c.getSize(); i++) {
+            for (int i = 0; i < c.size(); i++) {
                 if (L.isSymbol(c.get(i))) {
                     index.insert(i);
                     char var = c.get(i);
@@ -104,9 +104,9 @@ public class Compilation {
             //Scan KeyWord Line useing KeyWordDFA
             OutputLine += KeyWordScan.keywordDFa(s1, x);
             //For Loop Detect Identifier
-            if (lexeme.getSize()==0) {//it will enter here if lexeme is not found
+            if (lexeme.size()==0) {//it will enter here if lexeme is not found
                 //For Loop For Inc 1  inside arraylist Index
-                for (int i = 0; i < index.getSize(); i++) {
+                for (int i = 0; i < index.size(); i++) {
                     int oldValue = index.get(i);
                     int newValue = oldValue + 1;
                     index.replace(i, newValue);
@@ -118,7 +118,7 @@ public class Compilation {
                     c1.insert(ch);
                 }
                 //For Loop For convert all Symbol to /
-                for (int i = 0; i < index.getSize() - 1; i++) {
+                for (int i = 0; i < index.size() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c1.get(j);
                         if (!(j == index.get(i + 1))) {
@@ -129,7 +129,7 @@ public class Compilation {
                 }
             } else {//it will enter here if lexeme is found
                 //For Loop For convert all Symbol to /    
-                for (int i = 0; i < index.getSize() - 1; i++) {
+                for (int i = 0; i < index.size() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c.get(j);
                         if (!(j == index.get(i + 1))) {
@@ -141,7 +141,7 @@ public class Compilation {
             }
             //Build identifier to string
             StringBuilder S_indentifier = new StringBuilder();
-            for (int i=0;i<Identifier.getSize();i++) {
+            for (int i=0;i<Identifier.size();i++) {
                 S_indentifier.append(Identifier.get(i));
             }
             //Split Each identifiers and constants and put it into an String array 
@@ -203,7 +203,7 @@ public class Compilation {
                 LinkedList<Integer> MapKeys = map.getKeys();
                 //scan Line in map
                 Compilation scaner2 = new Compilation();
-                for (int i = 0; i < MapKeys.getSize(); i++) {
+                for (int i = 0; i < MapKeys.size(); i++) {
                     error += compile_error((String) map.get(i));
                 }
             
@@ -214,7 +214,7 @@ public class Compilation {
                 c.insert(ch);
             }
             ///For Loop For detect Lexeme
-            for (int i = 0; i < c.getSize(); i++) {
+            for (int i = 0; i < c.size(); i++) {
                 if ('@' == c.get(i)) {
                     for (int j = 0; j < i; j++) {
                         char var = c.get(j);
@@ -225,7 +225,7 @@ public class Compilation {
             //Bulid Lexeme and search if its found or not
             //Lexeme ---> Token
             StringBuilder sb = new StringBuilder();
-            for(int i=0;i<lexeme.getSize();i++){
+            for(int i=0;i<lexeme.size();i++){
                             sb.append(lexeme.get(i));
 
             }
@@ -234,7 +234,7 @@ public class Compilation {
             if (L.isLex(lex) == false) {error++;
             }
             ///For Loop For detect symbol and its index 
-            for (int i = 0; i < c.getSize(); i++) {
+            for (int i = 0; i < c.size(); i++) {
                 if (L.isSymbol(c.get(i))) {
                     index.insert(i);
                     char var = c.get(i);
@@ -242,9 +242,9 @@ public class Compilation {
                 }
             }
             //For Loop Detect Identifier
-            if (lexeme.getSize()==0) {//it will enter here if lexeme is not found
+            if (lexeme.size()==0) {//it will enter here if lexeme is not found
                 //For Loop For Inc 1  inside arraylist Index
-                for (int i = 0; i < index.getSize(); i++) {
+                for (int i = 0; i < index.size(); i++) {
                     int oldValue = index.get(i);
                     int newValue = oldValue + 1;
                     index.replace(i, newValue);
@@ -256,7 +256,7 @@ public class Compilation {
                     c1.insert(ch);
                 }
                 //For Loop For convert all Symbol to /
-                for (int i = 0; i < index.getSize() - 1; i++) {
+                for (int i = 0; i < index.size() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c1.get(j);
                         if (!(j == index.get(i + 1))) {
@@ -267,7 +267,7 @@ public class Compilation {
                 }
             } else {//it will enter here if lexeme is found
                 //For Loop For convert all Symbol to /    
-                for (int i = 0; i < index.getSize() - 1; i++) {
+                for (int i = 0; i < index.size() - 1; i++) {
                     for (int j = index.get(i) + 1; j < index.get(i + 1); j++) {
                         char var = c.get(j);
                         if (!(j == index.get(i + 1))) {
@@ -279,7 +279,7 @@ public class Compilation {
             }
             //Build identifier to string
             StringBuilder S_indentifier = new StringBuilder();
-            for (int i=0;i<Identifier.getSize();i++) {
+            for (int i=0;i<Identifier.size();i++) {
                 S_indentifier.append(Identifier.get(i));
             }
             //Split Each identifiers and constants and put it into an String array 
