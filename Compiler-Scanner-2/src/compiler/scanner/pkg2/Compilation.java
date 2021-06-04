@@ -26,7 +26,7 @@ public class Compilation {
         LinkedList<Character> symbol = new LinkedList<>(); //Arraylist for add found Symbols
         LinkedList<Character> c = new LinkedList<>();//First Char list take the string input from String s1
         LinkedList<Character> c1 = new LinkedList<>();//SEcond Char list take sting after add @ in index 0 Take inputs from s
-        LinkedList<Integer> index = new LinkedList<>();//Arraylist for add index of Symbols
+        ArrayList<Integer> index = new ArrayList<>();//Arraylist for add index of Symbols
         Lexeme L=new Lexeme();//Class Lexeme
          RegularExpression RE = new RegularExpression();
              ScannerString sc =new ScannerString(s1);
@@ -35,7 +35,17 @@ public class Compilation {
         if(s1.startsWith("/-")){
             symbols+=x+"\t"+"/-"+"\t"+L.getToken("/-")+"\t"+1+"\t"+"Matched"+"\n";
             return symbols;
-        }else if (sc.startsWith(new ScannerString("Using"))) {
+            
+        }
+        else if(s1.startsWith("/#")){
+         symbols+=x+"\t"+"/#"+"\t"+"Multi comment"+"\t"+1+"\t"+"Matched"+"\n";
+            return symbols;
+        }
+        else if(s1.endsWith("#/")){
+                 symbols+=x+"\t"+"#/"+"\t"+"Multi comment"+"\t"+1+"\t"+"Matched"+"\n";
+            return symbols;
+        }
+        else if (sc.startsWith(new ScannerString("Using"))) {
              Dictionary map = new Dictionary<Integer, String>();
             symbols += x + "\t" + "Using" + "\t" + "Read File" + "\t" + 1 + "\t" + "Matched" + "\n";
              ReadUsing= sc.split(new ScannerString(" "));
@@ -107,7 +117,7 @@ public class Compilation {
         ///For Loop For detect symbol and its index 
         for(int i=0;i<c.size();i++){
            if(L.isSymbol(c.get(i))){
-              index.insert(i);
+              index.add(i);
               char var=c.get(i);
               symbol.insert(var);
             }
@@ -133,21 +143,25 @@ public class Compilation {
             for(int i =0;i<index.size();i++){
                 int oldValue = index.get(i);
                 int newValue = oldValue + 1;
-                index.replace(i, newValue);
+                index.set(i, newValue);
             }
             //add 0 in Index 0
-            index.replace(0,0);
+            index.add(0,0);
             //Add @ symbol in the begininng of line
             String s ="@"+s1;
              for (char ch : s.toCharArray()) {
                 c1.insert(ch);
+                 System.out.println(ch);
             }
              //For Loop For convert all Symbol to /
              for(int i = 0;i<index.size()-1;i++){
+                
                 for (int j = index.get(i)+1;j<index.get(i+1);j++){
                 char var =c1.get(j);
+               
                 if(!(j==index.get(i+1))){
                 Identifier.insert(var);
+                
                 }
 
             }
@@ -215,9 +229,16 @@ public class Compilation {
    int error=0;
         //check if StringLine is comment
         if (sc.startsWith(sc1)) {
-        }else if (sc.startsWith(useing)) {
+        }else if(s1.startsWith("/#")){
+            
+            return 0 ; 
+        }else if(s1.endsWith("#/")){
+                 
+            return 0;
+        }
+        else if (sc.startsWith(useing)) {
              Dictionary map = new Dictionary<Integer, String>();
-  ReadUsing= sc.split(new ScannerString(" "));  
+        ReadUsing= sc.split(new ScannerString(" "));  
             System.out.println(ReadUsing.get(1).getString());
             
            String contents="";
@@ -273,6 +294,9 @@ public class Compilation {
                     index.insert(i);
                     char var = c.get(i);
                     symbol.insert(var);
+                    if(c.get(i)=='('){
+                        error--;
+                    }
                 }
             }
             //For Loop Detect Identifier

@@ -74,6 +74,8 @@ public class DFA_Keywords {
                         State = "P";
                     } else if (c == 'l') {
                         State = "Q";
+                    } else if (c == 'a') {
+                        State = "CR";    
                     } else {
                         State = "A";
                     }
@@ -94,7 +96,10 @@ public class DFA_Keywords {
                     if (c == 'n') {
                         State = "S";
 
-                    } else {
+                    }else if(c=='l'){
+                        State="DO";
+                    } 
+                    else {
                         State = "A";
                     }
 
@@ -663,12 +668,9 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("BM"): {
-                    if (c == '-') {
-                        State = "BX";
-
-                    } else {
-                        State = "A";
-                    }
+                    
+                        State = "A";//Check
+                    
 
                 }
                 break;
@@ -768,16 +770,16 @@ public class DFA_Keywords {
 
                 }
                 break;
-                case ("BX"): {
-                    if (c == 'C') {
-                        State = "CH";
-
-                    } else {
-                        State = "A";
-                    }
-
-                }
-                break;
+//                case ("BX"): {
+//                    if (c == 'C') {
+//                        State = "CH";
+//
+//                    } else {
+//                        State = "A";
+//                    }
+//
+//                }
+//                break;
                 case ("BY"): {
                     if (c == 'o') {
                         State = "CI";//FINAL STATE
@@ -838,7 +840,7 @@ public class DFA_Keywords {
 
                 }
                 break;
-                case ("CE"): {
+                case ("CE"): { ///////-////////////////////////////////////////////////////
                     if (c == 'r') {
                         State = "CO";
 
@@ -869,16 +871,16 @@ public class DFA_Keywords {
 
                 }
                 break;
-                case ("CH"): {
-                    if (c == 'a') {
-                        State = "CR";
-
-                    } else {
-                        State = "A";
-                    }
-
-                }
-                break;
+//                case ("CH"): {
+//                    if (c == 'a') {
+//                        State = "CR";
+//
+//                    } else {
+//                        State = "A";
+//                    }
+//
+//                }
+//                break;
                 case ("CI"): {
                     State = "A";//OUTPUT DIVISIO
 
@@ -1019,12 +1021,12 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("CX"): {
-                    if (c == 'o') {
-                        State = "DE";
+                   if (c == 'o') {
+                            State = "DE";
 
-                    }else {
-                        State = "A";
-                    }
+                        }else{
+                        State = "A"; 
+                   }
 
                 }
                 break;
@@ -1083,13 +1085,8 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("DE"): {
-                    if (c == '-') {
-                        State = "DJ";
 
-                    }else {
-                        State = "A";
-                    }
-
+                        State = "A"; //Final whetherDO
                 }
                 break;
 
@@ -1134,16 +1131,16 @@ public class DFA_Keywords {
 
                 }
                 break;
-                case ("DJ"): {
-                    if (c == 'e') {
-                        State = "DO";
-
-                    }else {
-                        State = "A";
-                    }
-
-                }
-                break;
+//                case ("DJ"): {
+//                    if (c == 'E') { ////Else///
+//                        State = "DO";
+//
+//                    }else {
+//                        State = "A";
+//                    }
+//
+//                }
+//                break;
                 //----------------------------------------COL-12---------------------------------------------------------------
                 case ("DK"): {
 
@@ -1178,7 +1175,7 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("DO"): {
-                    if (c == 'l') {
+                    if (c == 's') {
                         State = "DR";
 
                     }else {
@@ -1191,7 +1188,7 @@ public class DFA_Keywords {
 
                 case ("DP"): {
 
-                    State = "A";//OUTPUT CHECK-CASEOF 
+                    State = "A";//OUTPUT CASEOF 
 
                 }
                 break;
@@ -1206,7 +1203,7 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("DR"): {
-                    if (c == 's') {
+                    if (c == 'e') {
                         State = "DT";
 
                     }else {
@@ -1228,12 +1225,9 @@ public class DFA_Keywords {
                 }
                 break;
                 case ("DT"): {
-                    if (c == 'e') {
-                        State = "DV";
-
-                    }else {
-                        State = "A";
-                    }
+                   
+                        State = "A"; //Else
+                    
 
                 }
                 break;
@@ -1249,12 +1243,12 @@ public class DFA_Keywords {
 
                 }
                 break;
-                case ("DV"): {
-
-                    State = "A";//OUTPUT WHETHERDO-ELSE
-
-                }
-                break;
+//                case ("DV"): {
+//
+//                    State = "A";//OUTPUT WHETHERDO-ELSE
+//
+//                }
+//                break;
 ////------------------------------COL-16---------------------------------------------------------
 
                 case ("DW"): {
@@ -1280,8 +1274,10 @@ public class DFA_Keywords {
 
                 } else if (State == "CZ") {
                    KeyWordOutput+=NoLine+"\t"+"Beginning"+"\t"+L.getToken("Beginning")+"\t"+noLex+"\t"+"Matched"+"\n";
-                } else if (State == "DP") {
-                     KeyWordOutput+=NoLine+"\t"+"Check-CaseOf"+"\t"+L.getToken("Check-CaseOf")+"\t"+noLex+"\t"+"Matched"+"\n";
+                } else if (State == "BM") {
+                     KeyWordOutput+=NoLine+"\t"+"Check"+"\t"+L.getToken("Check")+"\t"+noLex+"\t"+"Matched"+"\n";
+                }else if (State == "DP") {
+                     KeyWordOutput+=NoLine+"\t"+"CaseOf"+"\t"+L.getToken("CaseOf")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "AI") {             
                      KeyWordOutput+=NoLine+"\t"+"Clo"+"\t"+L.getToken("Clo")+"\t"+noLex+"\t"+"Matched"+"\n";
                 } else if (State == "CI") {
@@ -1314,10 +1310,13 @@ public class DFA_Keywords {
                      KeyWordOutput+=NoLine+"\t"+"Using"+"\t"+L.getToken("Using")+"\t"+noLex+"\t"+"Matched"+"\n";
                     //System.out.println(L.getToken("Using"));
 
-                } else if (State == "DV") {
-                     KeyWordOutput+=NoLine+"\t"+"WhetherDo-Else"+"\t"+L.getToken("WhetherDo-Else")+"\t"+noLex+"\t"+"Matched"+"\n";
-                    //System.out.println(L.getToken("WhetherDo-Else"));
+                } else if (State == "DE") {
+                     KeyWordOutput+=NoLine+"\t"+"WhetherDo"+"\t"+L.getToken("WhetherDo")+"\t"+noLex+"\t"+"Matched"+"\n";
+   
 
+                }else if (State == "DT") {
+                     KeyWordOutput+=NoLine+"\t"+"Else"+"\t"+L.getToken("Else")+"\t"+noLex+"\t"+"Matched"+"\n";
+                    
                 }
               
 
@@ -1391,7 +1390,9 @@ public class DFA_Keywords {
                         if (c == 'n') {
                             State = "S";
 
-                        } 
+                        }else if(c=='l'){
+                            State="DO";
+                        }  
                     }
                     break;
                     case ("F"): {
@@ -2194,10 +2195,7 @@ public class DFA_Keywords {
                     }
                     break;
                     case ("DE"): {
-                        if (c == '-') {
-                            State = "DJ";
-
-                        }
+                        State="DE"; //Output Whether DO
 
                     }
                     break;
@@ -2237,14 +2235,14 @@ public class DFA_Keywords {
 
                     }
                     break;
-                    case ("DJ"): {
-                        if (c == 'e') {
-                            State = "DO";
-
-                        }
-
-                    }
-                    break;
+//                    case ("DJ"): {
+//                        if (c == 'e') {
+//                            State = "DO";
+//
+//                        }
+//
+//                    }
+//                    break;
                     //----------------------------------------COL-12---------------------------------------------------------------
                     case ("DK"): {
 
@@ -2319,10 +2317,10 @@ public class DFA_Keywords {
                     }
                     break;
                     case ("DT"): {
-                        if (c == 'e') {
-                            State = "DV";
+                        
+                            State = "DT"; //else
 
-                        }
+                        
 
                     }
                     break;
@@ -2336,12 +2334,12 @@ public class DFA_Keywords {
 
                     }
                     break;
-                    case ("DV"): {
-
-                        State = "DV";//OUTPUT WHETHERDO-ELSE
-
-                    }
-                    break;
+//                    case ("DV"): {
+//
+//                        State = "DV";//OUTPUT WHETHERDO-ELSE
+//
+//                    }
+//                    break;
 ////------------------------------COL-16---------------------------------------------------------
 
                     case ("DW"): {

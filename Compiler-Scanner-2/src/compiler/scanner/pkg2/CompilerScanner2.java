@@ -16,18 +16,21 @@ public class CompilerScanner2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        DFA_Keywords dfk=new DFA_Keywords();
-        DFA_For_Symbols dfs= new DFA_For_Symbols();
-        DFA_Identifier dfi=new DFA_Identifier();
-        Compilation c=new Compilation();
-        
+       DFA_Keywords dfk=new DFA_Keywords();
+//        DFA_For_Symbols dfs= new DFA_For_Symbols();
+//        DFA_Identifier dfi=new DFA_Identifier();
+      Compilation c=new Compilation();
+
 //        String s = "Ire@num=3;\nIre@num=3;";
 //        String[] splitted = s.split("\n");
 //        for(int i = 0; i < splitted.length; i++){
 //            System.out.println(c.compile_output(splitted[i], i));
 //        }
 //        
-                
+Lexeme l= new Lexeme();
+        System.out.println(l.isLex("WhetherDo"));
+        System.out.println(l.isLex("("));
+System.out.println( dfk.keywordDFa("WhetherDo", 0));               
        
 //        String s ="reg3=reg3-1;}";
 //        System.out.println(c.compile_output(s,0));
@@ -35,9 +38,9 @@ public class CompilerScanner2 {
 //        dfi.DFA_Constant(s);
 //        dfi.IdentifierDFA(s);
 //        System.out.println(dfs.SymbolDFA(s,1));
-        
-       ScannerGUI sc=new ScannerGUI();
-       sc.setVisible(true);
+      
+      ScannerGUI sc=new ScannerGUI();
+      sc.setVisible(true);
 
 }}
 

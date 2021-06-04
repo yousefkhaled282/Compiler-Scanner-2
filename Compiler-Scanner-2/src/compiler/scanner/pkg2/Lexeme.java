@@ -15,8 +15,8 @@ class Lexeme {
 
     public static final char[] NUMBER={'0','1', '2', '3', '4', '5', '6', '7', '8', '9'};
      public static final char[] Symbols={'+','-', '*', '/', '=', '&', ';', '>', '<', '{','}','[',']','|','@','!','~','\'','\"','.','(',')','|','&','~'};
-     public static final String[] SymbolsTry={ "+","-", "*", "/","=",";",">","<","{","}","[","]","@","~",".","(",")"};
-     public static final String[] Symbolsrep={"==","||","&&","!=", "<=",">=","/#","#/","/-" };
+//     public static final String[] SymbolsTry={ "+","-", "*", "/","=",";",">","<","{","}","[","]","@","~",".","(",")"};
+//     public static final String[] Symbolsrep={"==","||","&&","!=", "<=",">=","/#","#/","/-" };
      /*"+","-","*",
             "/","&&","||","~","==",
             "<",">","!=","<=",">=",
@@ -38,32 +38,32 @@ class Lexeme {
         }
         return result;
     }
-    public  boolean isSymboltry(String token)
-    {
-        boolean result = false;
-         for(int i=0;i<Symbols.length;i++)
-        {
-            if(token.equals(Symbols[i]))
-            {
-                result = true;
-                
-            }
-        }
-        return result;
-    }
+//    public  boolean isSymboltry(String token)
+//    {
+//        boolean result = false;
+//         for(int i=0;i<Symbols.length;i++)
+//        {
+//            if(token.equals(Symbols[i]))
+//            {
+//                result = true;
+//                
+//            }
+//        }
+//        return result;
+//    }
     
-    public  boolean isSymbolrep(String token)
-    {
-        boolean result = false;
-         for(int i=0;i<Symbolsrep.length;i++)
-        {
-            if(token.equals(Symbolsrep[i]))
-            {
-                result = true;
-            }
-        }
-        return result;
-    }
+//    public  boolean isSymbolrep(String token)
+//    {
+//        boolean result = false;
+//         for(int i=0;i<Symbolsrep.length;i++)
+//        {
+//            if(token.equals(Symbolsrep[i]))
+//            {
+//                result = true;
+//            }
+//        }
+//        return result;
+//    }
     public  boolean isNumber(char token)
      {  
          boolean result = false;
@@ -98,23 +98,23 @@ class Lexeme {
     }
     
     public  final String[] Lex={"Divisio","InferedFrom",
-            "WhetherDo-Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","NoneValue",
-            "TerminateThisNow","RingWhen","BackedValue","STT","Check–CaseOf",
+            "WhetherDo","Else","Ire","Sire","Clo","SetOfClo","FBU","SFBU","NoneValue",
+            "TerminateThisNow","RingWhen","BackedValue","STT","Check","CaseOf",
             "Beginning","End","+","-","*",
             "/","&&","||","~","==",
             "<",">","!=","<=",">=",
             "=",".","{","}","[","]",
             "'","","Using","/#","#/",
-            "/-","@",";"};
+            "/-","@",";","(",")"};
     
-    public  int Get(String Lexe){
-       for(int i=0;i<Lex.length;i++){
-         if(Lexe.equals(Lex[i])){
-             return i;
-         }
-       }
-       return -1;
-    }
+//    public  int Get(String Lexe){
+//       for(int i=0;i<Lex.length;i++){
+//         if(Lexe.equals(Lex[i])){
+//             return i;
+//         }
+//       }
+//       return -1;
+//    }
      public  boolean isLex(String token){
        for(int i=0;i<Lex.length;i++){
            if (Lex[i].equals(token))
@@ -126,7 +126,8 @@ class Lexeme {
         switch (token){
             case "Divisio":return "Class";
             case "InferedFrom":return "Inheritance";
-            case "WhetherDo-Else":return "Condition";
+            case "WhetherDo":return "Condition";
+            case "Else":return "Condition";
             case"Ire": return "Integer";
             case"Sire":return "SInteger";
             case "Clo":return "Character";
@@ -138,7 +139,8 @@ class Lexeme {
             case "RingWhen":return "Loop";
             case "BackedValue":return "Return";
             case "STT":return "Struct";
-            case "Check–CaseOf":return "Switch";
+            case "Check":return "Switch";
+            case "CaseOf":return "Case";
             case "Beginning":return "Start Statement";
             case "End":return "End Statement";
             case "+":
