@@ -61,6 +61,19 @@ public class LinkedList<T> {
         return temp.value;
     }
 
+    private Node<T> getNode(int index) {
+        if (index == 0) {
+            return head;
+        }
+        Node<T> temp = head;
+        for (int i = 0; i < index && i < size; i++) {
+            if (temp.nextNode != null) {
+                temp = temp.nextNode;
+            }
+        }
+        return temp;
+    }
+
     public void remove(T value) {
         Node<T> temp = head;
         Node<T> prev = null;
@@ -93,16 +106,23 @@ public class LinkedList<T> {
     }
 
     public void replace(int index, T value) {
-        if (index > size ) {
+        if (index > size || index < 0) {
             return;
         }
         if (index == 0 && head != null) {
             head.value = value;
         }
-        Node<T> temp = head.nextNode;
-        for (int i = 0; i < index&&temp.nextNode!=null; i++) {
-            temp = temp.nextNode;
-        }
-        temp.value = value;
+        Node<T> toReplace = this.getNode(index);
+        toReplace.value = value;
     }
+
+//    public static void main(String[] args) {
+//        LinkedList<Integer> l = new LinkedList<>();
+//        l.insert(0);
+//        l.insert(1);
+//        l.replace(0, 5);
+//        for (int i = 0; i < l.size(); i++) {
+//            System.out.println(l.get(i));
+//        }
+//    }
 }
